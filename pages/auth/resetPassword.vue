@@ -2,10 +2,35 @@
   <div></div>
 </template>
 
-<script lang="ts">
-  import Vue from "vue";
+<script >
+  import { getMetaTags } from "@/utils/seo";
+  import { getStrapiMedia } from "@/utils/medias";
+  import { mapGetters } from "vuex";
 
-  export default Vue.extend({});
+  export default {
+    computed: mapGetters({
+      global: "global/getGlobal",
+    }),
+
+    head() {
+      const { defaultSeo, favicon, siteName } = this.global;
+
+      const fullSeo = {
+        ...defaultSeo,
+      };
+      return {
+        titleTemplate: `%s | ${siteName}`,
+        title: fullSeo.metaTitle,
+        meta: getMetaTags(fullSeo),
+        link: [
+          {
+            rel: "icon",
+            href: getStrapiMedia(favicon.url),
+          },
+        ],
+      };
+    },
+  };
 </script>
 
 <style>

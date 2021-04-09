@@ -1,21 +1,18 @@
+const strapiBaseUri = process.env.API_URL || "http://localhost:1337";
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
+    env: {
+    strapiBaseUri,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'minigreens-frontend',
-    htmlAttrs: {
-      lang: 'en'
-    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -39,7 +36,22 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/strapi'
   ],
+
+  strapi: {
+    url: strapiBaseUri,
+    entities: [
+      { name: 'homepage', type: 'single' },
+      { name: 'contact', type: 'single' },
+      { name: 'faq', type: 'single' },
+      { name: 'farm', type: 'single' },
+      { name: 'global', type: 'single' },
+      { name: 'articles', type: 'collection' },
+      { name: 'products', type: 'collection' },
+      { name: 'orders', type: 'collection' },
+    ]
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
