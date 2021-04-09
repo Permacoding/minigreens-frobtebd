@@ -1,26 +1,17 @@
 <template>
-  <div>
-    <div
-      v-if="article.image"
-      id="banner"
-      class="uk-height-small uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding"
-      :data-src="getStrapiMedia(article.cover.url)"
-      uk-img
-    >
-      <h1>{{ article.title }}</h1>
-    </div>
+  <div class="max-w-screen-lg mx-auto">
+    <img :src="getStrapiMedia(article.cover.url)" class="w-full" />
+    <h1 class="text-xl font-semibold py-4">{{ article.title }}</h1>
 
-    <div class="uk-section">
-      <div class="uk-container uk-container-small">
-        <!-- eslint-disable vue/no-v-html -->
+    <div>
+      <div>
         <div
           v-if="article.content"
-          id="editor"
           v-html="$md.render(article.content)"
+          id="article"
         />
-        <!-- eslint-enable vue/no-v-html -->
-        <p>
-          {{ $moment(article.published_at).format("MMM Do YY") }}
+        <p class="italic text-right">
+          publie le {{ $moment(article.published_at).format("Do MMM YYYY") }}
         </p>
       </div>
     </div>
@@ -30,6 +21,8 @@
 <script>
   import { getStrapiMedia } from "@/utils/medias";
   import { getMetaTags } from "@/utils/seo";
+  import { mapGetters } from "vuex";
+
   export default {
     computed: {
       ...mapGetters({
@@ -37,7 +30,7 @@
         getArticleBySlug: "articles/bySlug",
       }),
       article() {
-        return this.getArticleBySlug(params.slug);
+        return this.getArticleBySlug(this.$route.params.slug);
       },
     },
     methods: {
@@ -66,3 +59,10 @@
     },
   };
 </script>
+
+<style>
+#article p {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+</style>

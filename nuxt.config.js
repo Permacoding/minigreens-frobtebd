@@ -32,11 +32,26 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/moment',
+    '@nuxtjs/fontawesome',
   ],
+
+  moment: {
+    defaultLocale: 'fr',
+    locales:['fr']
+  },
+  
+  fontawesome: {
+    component: "fa",
+    suffix: true,
+    icons: {}
+  },
+
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/strapi'
+    '@nuxtjs/strapi',
+    '@nuxtjs/markdownit',
   ],
 
   strapi: {
@@ -50,6 +65,17 @@ export default {
       { name: 'articles', type: 'collection' },
       { name: 'products', type: 'collection' },
       { name: 'orders', type: 'collection' },
+    ]
+  },
+
+  markdownit: {
+    runtime: true,
+    preset: 'default',
+    linkify: true,
+    breaks: true,
+    use: [
+      'markdown-it-div',
+      'markdown-it-attrs'
     ]
   },
 
