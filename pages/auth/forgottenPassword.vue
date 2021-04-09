@@ -3,8 +3,8 @@
 </template>
 
 <script >
-  import { getMetaTags } from "../utils/seo";
-  import { getStrapiMedia } from "../utils/medias";
+  import { getMetaTags } from "@/utils/seo";
+  import { getStrapiMedia } from "@/utils/medias";
   import { mapGetters } from "vuex";
 
   export default {
