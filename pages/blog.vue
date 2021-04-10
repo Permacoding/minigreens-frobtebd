@@ -10,7 +10,7 @@
   export default {
     async asyncData({ $strapi }) {
       return {
-        farm: await $strapi.find("farm"),
+        blog: await $strapi.find("blog"),
       };
     },
 
@@ -19,7 +19,7 @@
     }),
 
     head() {
-      const { seo } = this.farm;
+      const { seo } = this.blog;
       const { defaultSeo, favicon, siteName } = this.global;
 
       const fullSeo = {

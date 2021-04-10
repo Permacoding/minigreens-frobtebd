@@ -44,7 +44,9 @@ export default {
   fontawesome: {
     component: "fa",
     suffix: true,
-    icons: {}
+    icons: {
+      solid:['faShoppingCart']
+    }
   },
 
 
