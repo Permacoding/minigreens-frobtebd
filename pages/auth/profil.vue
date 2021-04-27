@@ -4,18 +4,28 @@
       v-model="formValues"
       class="flex flex-col elevation-3 border py-3 rounded-lg"
     >
-      <h1 class="text-xl font-semibold text-center my-2">Connexion</h1>
+      <h1 class="text-xl font-semibold text-center my-2">Inscription</h1>
       <p class="font-light text-center my-2">
-        Pas encore de compte ?
-        <nuxt-link to="/auth/register">Inscription</nuxt-link>
+        Deja un compte ?
+        <nuxt-link to="/auth/login">Connexion</nuxt-link>
       </p>
       <FormulateInput
+        type="text"
+        name="username"
+        label="Nom utilisateur"
+        validation-name="Nom d'utilisateur"
+        validation="required"
+        :input-class="'w-64'"
+        class="my-2 items-center flex flex-col"
+      />
+
+      <FormulateInput
         type="email"
-        name="identifier"
+        name="email"
         label="Email"
         validation="required|email"
         :input-class="'w-64'"
-        class="my-2 justify-center flex"
+        class="my-2 items-center flex flex-col"
         placeholder="example@mail.com"
       />
 
@@ -25,19 +35,25 @@
         label="Mot de passe"
         validation="required|min:6,length"
         validation-name="Mot de passe"
-        class="my-2 justify-center flex"
+        class="my-2 items-center flex flex-col"
         :input-class="'w-64'"
       />
+
+      <FormulateInput
+        type="password"
+        name="password_confirm"
+        label="Confirmation mot de passe"
+        validation="required|confirm"
+        validation-name="Confirmation"
+        class="my-2 items-center flex flex-col"
+        :input-class="'w-64'"
+      />
+
       <loading-button
         :loading="loading"
-        @click="login()"
+        @click="register()"
         class="bg-indigo-500 text-gray-200 my-2 self-center"
-        >Se connecter</loading-button
-      >
-      <nuxt-link
-        to="/auth/forgottenPassword"
-        class="self-center font-ligth my-2"
-        >Mot de passe oublie ?</nuxt-link
+        >S'inscrire</loading-button
       >
     </FormulateForm>
   </div>
@@ -60,17 +76,17 @@
       };
     },
     methods: {
-      async login() {
+      async updateUser() {
         this.loading = true;
         try {
-          console.log(this.formValues);
-          await this.$strapi.login(this.formValues);
-          this.$toast.success("Bienvenue " + this.$strapi.user.username);
+         // const res = await this.$strapi.register(this.formValues);
+          this.$toast.success("Informations personnelles mises a jour.");
           this.$router.push("/");
         } catch {}
         this.loading = false;
       },
     },
+
     head() {
       const { defaultSeo, favicon, siteName } = this.global;
 

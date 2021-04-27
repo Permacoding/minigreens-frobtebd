@@ -22,6 +22,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '@/plugins/strapi',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,7 +48,7 @@ export default {
     component: "fa",
     suffix: true,
     icons: {
-      solid:['faShoppingCart']
+      solid:['faShoppingCart','faTimes','faSignOutAlt']
     }
   },
 
@@ -56,6 +57,7 @@ export default {
   modules: [
     '@nuxtjs/strapi',
     '@nuxtjs/markdownit',
+    '@nuxtjs/toast',
   ],
 
   strapi: {
@@ -81,6 +83,20 @@ export default {
       'markdown-it-div',
       'markdown-it-attrs'
     ]
+  },
+
+  toast: {
+      position: 'top-center',
+      duration:4000,
+      register: [ // Register custom toasts
+        {
+          name: 'my-error',
+          message: 'Oops...Une erreur s\'est produite',
+          options: {
+            type: 'error'
+          }
+        }
+      ]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

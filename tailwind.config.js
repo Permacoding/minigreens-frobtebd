@@ -1,3 +1,5 @@
+const { faRubleSign } = require('@fortawesome/free-solid-svg-icons');
+
 /*
 ** TailwindCSS Configuration File
 **
