@@ -8,6 +8,7 @@
   import { mapGetters } from "vuex";
 
   export default {
+    middleware: ["guest"],
     computed: mapGetters({
       global: "global/getGlobal",
     }),

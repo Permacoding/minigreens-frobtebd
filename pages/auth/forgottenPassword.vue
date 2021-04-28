@@ -1,10 +1,7 @@
 <template>
   <div class="max-w-screen-sm mx-auto">
-    <FormulateForm
-      v-model="formValues"
-      class="flex flex-col elevation-3 border py-3 rounded-lg"
-    >
-      <h1 class="text-xl font-semibold text-center my-2">
+    <FormulateForm v-model="formValues" class="flex flex-col py-3">
+      <h1 class="text-2xl font-semibold text-center mb-4">
         Mot de passe oublié ?
       </h1>
       <FormulateInput
@@ -32,6 +29,7 @@
   import { mapGetters } from "vuex";
 
   export default {
+    middleware: ["guest"],
     data() {
       return {
         loading: false,

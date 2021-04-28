@@ -65,7 +65,7 @@
   import { mapGetters } from "vuex";
 
   export default {
-    middleware: ["guest"],
+    middleware: ["authentificated"],
     computed: mapGetters({
       global: "global/getGlobal",
     }),
@@ -79,7 +79,7 @@
       async updateUser() {
         this.loading = true;
         try {
-         // const res = await this.$strapi.register(this.formValues);
+          // const res = await this.$strapi.register(this.formValues);
           this.$toast.success("Informations personnelles mises a jour.");
           this.$router.push("/");
         } catch {}

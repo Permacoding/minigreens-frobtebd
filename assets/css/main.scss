@@ -1,3 +1,20 @@
+
+/* ########### 
+GLOBALS 
+#############*/
+
+html{
+  overflow-x:hidden;
+}
+
+h2{
+  font-weight: 600;
+  font-size: larger;
+}
+/* ########### 
+Page transition @nuxt
+#############*/
+
 .page-enter-active,
 .page-leave-active {
   transition: opacity 0.5s;
@@ -7,6 +24,40 @@
   opacity: 0;
 }
 
-.formulate-input-element input{
-    @apply rounded-md border py-1 px-2 bg-white outline-none
+/* ########### 
+nuxt-link @nuxt
+#############*/
+a.nuxt-link-active {
+  font-weight: bold;
 }
+a.nuxt-link-exact-active {
+  color: #16664f;
+  pointer-events: none;
+}
+/* ########### 
+Components
+############# */
+
+.button--action{
+  @apply rounded-full bg-black text-white py-2 px-2 cursor-pointer;
+}
+
+/* ########### 
+Plugins V-formulate
+############# */
+
+.formulate-input-element input{
+    @apply rounded-md border py-1 px-2 bg-white outline-none;
+}
+
+/* ########### 
+Plugins V-toast
+############# */
+
+.toasted-container.toastContainer.top-right {
+	top: 4rem;
+	right: 0%;
+}
+
+
+

@@ -1,8 +1,9 @@
 <template>
   <div
-    class="hamburger top-0 right-0 absolute mr-8 mt-8"
-    @click="isOpen = !isOpen"
+    id="hamburger"
+    class="hamburger flex cursor-pointer"
     :class="isOpen ? 'hamburger--is-open' : ''"
+    @click="isOpen = isOpen === false ? 'menu' : false"
   >
     <div class="hamburger__item hamburger__item--first"></div>
     <div class="hamburger__item hamburger__item--middle"></div>
@@ -15,7 +16,6 @@
     name: "Hamburger",
     props: {
       isMenuOpened: {
-        type: Boolean,
         required: true,
       },
     },
@@ -23,10 +23,10 @@
     computed: {
       isOpen: {
         get: function () {
-          return this.isMenuOpened;
+          return this.isMenuOpened === "menu";
         },
         set: function (value) {
-          this.$emit(`update:isMenuOpened`, value);
+          this.$emit(`update:isOpen`, value);
         },
       },
     },
@@ -37,7 +37,6 @@
 .hamburger {
   height: 25px;
   width: 29px;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   &:hover {
@@ -47,7 +46,7 @@
   &__item {
     height: 4px;
     width: 100%;
-    background: #f3a83b;
+    background: black;
     transition: transform 300ms cubic-bezier(0.445, 0.05, 0.55, 0.95),
       opacity 300ms linear;
 

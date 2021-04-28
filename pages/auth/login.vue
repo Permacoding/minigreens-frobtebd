@@ -1,22 +1,18 @@
 <template>
   <div class="max-w-screen-sm mx-auto">
-    <FormulateForm
-      v-model="formValues"
-      class="flex flex-col elevation-3 border py-3 rounded-lg"
-    >
-      <h1 class="text-xl font-semibold text-center my-2">Connexion</h1>
-      <p class="font-light text-center my-2">
+    <FormulateForm v-model="formValues" class="flex flex-col py-3">
+      <h1 class="text-2xl font-semibold text-center">Connexion</h1>
+      <p class="font-light text-center text-sm mb-6 mt-1">
         Pas encore de compte ?
-        <nuxt-link to="/auth/register">Inscription</nuxt-link>
+        <nuxt-link to="/auth/register" class="link">Inscription</nuxt-link>
       </p>
       <FormulateInput
         type="email"
         name="identifier"
         label="Email"
         validation="required|email"
-        :input-class="'w-64'"
-        class="my-2 justify-center flex"
-        placeholder="example@mail.com"
+        :input-class="'w-full'"
+        class="my-2 self-center flex flex-col w-64"
       />
 
       <FormulateInput
@@ -25,8 +21,8 @@
         label="Mot de passe"
         validation="required|min:6,length"
         validation-name="Mot de passe"
-        class="my-2 justify-center flex"
-        :input-class="'w-64'"
+        class="my-2 self-center flex flex-col w-64"
+        :input-class="'w-full'"
       />
       <loading-button
         :loading="loading"
@@ -36,7 +32,7 @@
       >
       <nuxt-link
         to="/auth/forgottenPassword"
-        class="self-center font-ligth my-2"
+        class="self-center font-light my-2 text-sm link"
         >Mot de passe oublie ?</nuxt-link
       >
     </FormulateForm>

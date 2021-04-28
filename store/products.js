@@ -5,6 +5,7 @@ export const state = () => ({
 
 export const getters = {
     allProducts: (state) => state.allProducts,
+    nbCartItems: (state) => state.cartItems.length,
     getCart: (state) => state.cartItems,
    /*  getCartTotal: (state) =>
     state.cartItems.length < 1

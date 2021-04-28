@@ -1,7 +1,7 @@
 <template>
-  <div
+  <button
     class="inline-block text-center relative rounded-md hover:opacity-90 cursor-pointer px-6 py-2 font-semibold shadow-md"
-    @click="!loading ? $emit('click') : ''"
+    @click.prevent="!loading ? $emit('click') : ''"
   >
     <div :class="{ 'opacity-0': loading }" class="w-full">
       <slot></slot>
@@ -20,7 +20,7 @@
       <div class="sk-circle11 sk-circle"></div>
       <div class="sk-circle12 sk-circle"></div>
     </div>
-  </div>
+  </button>
 </template>
 
 <script>

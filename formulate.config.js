@@ -4,9 +4,10 @@ export default{
     plugins:[fr],
     locale:'fr',
     classes:{
-        input: ['rounded-md border py-1 px-2 bg-white outline-none'],
+        wrapper:['w-full'],
+        input: ['rounded-md border py-2 px-3 bg-white outline-under w-full shadow-sm'],
         element:['my-1'],
-        errors: ['text-red-500 text-sm px-1'],
+        errors: ['text-red-400 text-xs px-1 pb-2'],
         label:[''],
     }
 }

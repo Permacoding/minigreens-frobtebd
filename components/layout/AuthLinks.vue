@@ -1,0 +1,38 @@
+<template>
+  <div class="flex flex-col items-center my-2" client-only>
+    <nuxt-link
+      to="/auth/login"
+      class="button--action text-sm my-1"
+      v-if="!$strapi.user"
+      >Se connecter</nuxt-link
+    >
+    <nuxt-link v-if="$strapi.user" to="/auth/profil" class="my-1">
+      {{ $strapi.user.username }}
+    </nuxt-link>
+    <span
+      @click="logout"
+      v-if="$strapi.user"
+      class="button--action text-sm my-1"
+    >
+      Se deconnecter
+    </span>
+  </div>
+</template>
+
+<script>
+  export default {
+    methods: {
+      async logout() {
+        this.$loading = true;
+        try {
+          await this.$strapi.logout();
+          this.$toast.success("Deconnection");
+        } catch {}
+        this.$loading = false;
+      },
+    },
+  };
+</script>
+
+<style lang="scss" scoped>
+</style>

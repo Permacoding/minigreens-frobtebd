@@ -1,60 +1,28 @@
 <template>
-  <div class="max-w-screen-sm mx-auto">
+  <div class="flex flex-col max-w-screen-xl w-full py-3 m-auto">
+    <h1 class="text-3xl font-semibold text-center">Inscription</h1>
+    <p class="font-light text-center mb-6 text-sm mt-1">
+      Déjà un compte ?
+      <nuxt-link to="/auth/login" class="link">Connexion</nuxt-link>
+    </p>
     <FormulateForm
       v-model="formValues"
-      class="flex flex-col elevation-3 border py-3 rounded-lg"
+      class="flex flex-col justify-center max-w-screen-lg m-auto w-full"
     >
-      <h1 class="text-xl font-semibold text-center my-2">Inscription</h1>
-      <p class="font-light text-center my-2">
-        Deja un compte ?
-        <nuxt-link to="/auth/login">Connexion</nuxt-link>
-      </p>
-      <FormulateInput
-        type="text"
-        name="username"
-        label="Nom utilisateur"
-        validation-name="Nom d'utilisateur"
-        validation="required"
-        :input-class="'w-64'"
-        class="my-2 items-center flex flex-col"
-      />
-
-      <FormulateInput
-        type="email"
-        name="email"
-        label="Email"
-        validation="required|email"
-        :input-class="'w-64'"
-        class="my-2 items-center flex flex-col"
-        placeholder="example@mail.com"
-      />
-
-      <FormulateInput
-        type="password"
-        name="password"
-        label="Mot de passe"
-        validation="required|min:6,length"
-        validation-name="Mot de passe"
-        class="my-2 items-center flex flex-col"
-        :input-class="'w-64'"
-      />
-
-      <FormulateInput
-        type="password"
-        name="password_confirm"
-        label="Confirmation mot de passe"
-        validation="required|confirm"
-        validation-name="Confirmation"
-        class="my-2 items-center flex flex-col"
-        :input-class="'w-64'"
-      />
-
-      <loading-button
-        :loading="loading"
-        @click="register()"
-        class="bg-indigo-500 text-gray-200 my-2 self-center"
-        >S'inscrire</loading-button
-      >
+      <div class="form-content">
+        <FormPersonal class="split" :askCreation="false"
+          >Informations personnelles</FormPersonal
+        >
+        <FormAddress class="split">Adresse de Facturation</FormAddress>
+      </div>
+      <div class="flex flex-col items-center mt-4">
+        <loading-button
+          :loading="loading"
+          @click="register()"
+          class="bg-indigo-500 text-gray-200 mt-4 min-w-76"
+          >S'inscrire</loading-button
+        >
+      </div>
     </FormulateForm>
   </div>
 </template>
@@ -66,6 +34,16 @@
 
   export default {
     middleware: ["guest"],
+    async mounted() {
+      try {
+        await this.$recaptcha.init();
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    beforeDestroy() {
+      this.$recaptcha.destroy();
+    },
     computed: mapGetters({
       global: "global/getGlobal",
     }),
@@ -79,6 +57,8 @@
       async register() {
         this.loading = true;
         try {
+          const token = await this.$recaptcha.execute("login");
+          this.formValues.token = token;
           const res = await this.$strapi.register(this.formValues);
           this.$toast.success("Merci pour votre inscription.");
           this.$router.push("/");
@@ -109,4 +89,20 @@
 </script>
 
 <style>
+.form-content {
+  @apply flex  flex-wrap flex-1 w-full;
+}
+
+.form-line {
+  @apply flex flex-wrap justify-between;
+}
+.split {
+  @apply flex flex-col  min-w-96 max-w-screen-sm flex-grow pl-4 self-start mx-auto;
+}
+.split > * {
+  margin-bottom: 0.75rem;
+}
+.form-content > * {
+  flex-basis: 50%;
+}
 </style>
