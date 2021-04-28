@@ -6,7 +6,10 @@ GLOBALS
 html{
   overflow-x:hidden;
 }
-
+h1{
+  font-weight: 700;
+  font-size: xx-large;
+}
 h2{
   font-weight: 600;
   font-size: larger;
@@ -48,6 +51,23 @@ Plugins V-formulate
 
 .formulate-input-element input{
     @apply rounded-md border py-1 px-2 bg-white outline-none;
+}
+
+.form-2-col {
+  @apply flex  flex-wrap flex-1 w-full;
+}
+
+.form-line {
+  @apply flex flex-wrap justify-between;
+}
+.form-col {
+  @apply flex flex-col min-w-80 max-w-screen-sm pl-4 self-start mx-auto;
+}
+.form-col > * {
+  margin-bottom: 0.75rem;
+}
+.form-2-col > * {
+  flex-basis: 50%;
 }
 
 /* ########### 

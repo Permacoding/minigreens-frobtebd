@@ -1,24 +1,26 @@
 <template>
-  <div class="max-w-screen-sm mx-auto">
-    <FormulateForm v-model="formValues" class="flex flex-col py-3">
-      <h1 class="text-2xl font-semibold text-center mb-4">
-        Mot de passe oublié ?
-      </h1>
-      <FormulateInput
-        type="email"
-        name="email"
-        label="Email"
-        validation="required|email"
-        :input-class="'w-64'"
-        class="my-2 justify-center flex"
-        placeholder="example@mail.com"
-      />
-      <loading-button
-        :loading="loading"
-        @click="sendForgotPasswordMail()"
-        class="bg-indigo-500 text-gray-200 my-2 self-center"
-        >Envoyer le mail de réinitialisation</loading-button
-      >
+  <div class="max-w-screen-sm mx-auto my-4">
+    <h1 class="text-2xl font-semibold text-center mb-4">
+      Mot de passe oublié ?
+    </h1>
+    <FormulateForm v-model="formValues" class="flex flex-col">
+      <div class="form-col">
+        <FormulateInput
+          type="email"
+          name="email"
+          label="Email"
+          validation="required|email"
+          :input-class="'w-80'"
+          class="mx-auto mb-4"
+          placeholder="example@mail.com"
+        />
+        <loading-button
+          :loading="loading"
+          @click="sendForgotPasswordMail()"
+          class="bg-indigo-500 text-gray-200 my-2"
+          >Envoyer le mail de réinitialisation</loading-button
+        >
+      </div>
     </FormulateForm>
   </div>
 </template>
@@ -29,7 +31,6 @@
   import { mapGetters } from "vuex";
 
   export default {
-    middleware: ["guest"],
     data() {
       return {
         loading: false,

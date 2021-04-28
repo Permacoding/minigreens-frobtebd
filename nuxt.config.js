@@ -71,6 +71,9 @@ export default {
 
   strapi: {
     url: strapiBaseUri,
+    key:'whateverkey',
+    expires:'31d',
+    cookie: { sameSite: true, path: '/', },
     entities: [
       { name: 'homepage', type: 'single' },
       { name: 'contact', type: 'single' },

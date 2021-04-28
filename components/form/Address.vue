@@ -3,6 +3,24 @@
     <h2 class="mb-4">
       <slot></slot>
     </h2>
+    <div class="form-line" v-if="withName">
+      <FormulateInput
+        type="text"
+        name="name"
+        label="Nom *"
+        validation-name="Nom "
+        validation="required"
+        class="mr-2 min-w-44 max-w-72 flex-grow"
+      />
+      <FormulateInput
+        type="text"
+        name="fname"
+        label="Prénom *"
+        validation-name="Prenom"
+        validation="required"
+        class="mr-2 min-w-44 max-w-72 flex-grow"
+      />
+    </div>
     <FormulateInput
       type="text"
       name="num"
@@ -42,7 +60,14 @@
 </template>
 
 <script>
-  export default {};
+  export default {
+    props: {
+      withName: {
+        type: Boolean,
+        default: false,
+      },
+    },
+  };
 </script>
 
 <style lang="scss" scoped>

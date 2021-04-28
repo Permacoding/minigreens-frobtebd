@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center my-2" client-only>
+  <div class="flex flex-col items-center my-2">
     <nuxt-link
       to="/auth/login"
       class="button--action text-sm my-1"
@@ -21,12 +21,17 @@
 
 <script>
   export default {
+    mounted() {
+      console.log(this.$route.meta);
+    },
     methods: {
       async logout() {
         this.$loading = true;
         try {
           await this.$strapi.logout();
-          this.$toast.success("Deconnection");
+          if (["auth-profil"].includes(this.$route.name))
+            this.$router.push({ name: "auth-login" });
+          this.$toast.success("Déconnection");
         } catch {}
         this.$loading = false;
       },

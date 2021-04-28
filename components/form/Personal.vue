@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="personal">
     <h2 class="mb-4"><slot></slot></h2>
     <div class="form-line">
       <FormulateInput
@@ -23,6 +23,7 @@
       type="email"
       name="email"
       label="Email *"
+      :disabled="disableEmail"
       validation="required|email"
       class="max-w-88"
       placeholder="example@mail.com"
@@ -63,11 +64,19 @@
     props: {
       askCreation: {
         type: Boolean,
-        default: true,
+        default: false,
+      },
+      showMdp: {
+        type: Boolean,
+        default: false,
+      },
+      disableEmail: {
+        type: Boolean,
+        default: false,
       },
     },
     created() {
-      this.showPassword = !this.askCreation;
+      this.showPassword = this.showMdp;
     },
     data() {
       return {
@@ -78,4 +87,7 @@
 </script>
 
 <style lang="scss" scoped>
+.personal > * {
+  margin-bottom: 0.75rem;
+}
 </style>

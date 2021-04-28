@@ -1,59 +1,20 @@
 <template>
-  <div class="max-w-screen-sm mx-auto">
-    <FormulateForm
-      v-model="formValues"
-      class="flex flex-col elevation-3 border py-3 rounded-lg"
-    >
-      <h1 class="text-xl font-semibold text-center my-2">Inscription</h1>
-      <p class="font-light text-center my-2">
-        Deja un compte ?
-        <nuxt-link to="/auth/login">Connexion</nuxt-link>
-      </p>
-      <FormulateInput
-        type="text"
-        name="username"
-        label="Nom utilisateur"
-        validation-name="Nom d'utilisateur"
-        validation="required"
-        :input-class="'w-64'"
-        class="my-2 items-center flex flex-col"
-      />
-
-      <FormulateInput
-        type="email"
-        name="email"
-        label="Email"
-        validation="required|email"
-        :input-class="'w-64'"
-        class="my-2 items-center flex flex-col"
-        placeholder="example@mail.com"
-      />
-
-      <FormulateInput
-        type="password"
-        name="password"
-        label="Mot de passe"
-        validation="required|min:6,length"
-        validation-name="Mot de passe"
-        class="my-2 items-center flex flex-col"
-        :input-class="'w-64'"
-      />
-
-      <FormulateInput
-        type="password"
-        name="password_confirm"
-        label="Confirmation mot de passe"
-        validation="required|confirm"
-        validation-name="Confirmation"
-        class="my-2 items-center flex flex-col"
-        :input-class="'w-64'"
-      />
-
+  <div class="max-w-screen-lg mx-auto">
+    <FormulateForm v-model="formValues" class="flex flex-col w-full flex-grow">
+      <h1 class="text-center mt-2 mb-4">Profil</h1>
+      <div class="form-2-col">
+        <FormPersonal class="form-col w-full" :disableEmail="true"
+          >Informations personnelles</FormPersonal
+        >
+        <FormAddress class="form-col w-full"
+          >Adresse de Facturation</FormAddress
+        >
+      </div>
       <loading-button
         :loading="loading"
         @click="register()"
-        class="bg-indigo-500 text-gray-200 my-2 self-center"
-        >S'inscrire</loading-button
+        class="bg-indigo-500 text-gray-200 my-2 w-80 self-end"
+        >Mettre à jour</loading-button
       >
     </FormulateForm>
   </div>
@@ -66,6 +27,9 @@
 
   export default {
     middleware: ["authentificated"],
+    mounted() {
+      this.formValues = this.$strapi.user;
+    },
     computed: mapGetters({
       global: "global/getGlobal",
     }),
