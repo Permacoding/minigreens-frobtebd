@@ -5,6 +5,7 @@ GLOBALS
 
 html{
   overflow-x:hidden;
+  min-height: 101%;
 }
 h1{
   font-weight: 700;
@@ -71,6 +72,28 @@ Plugins V-formulate
 }
 
 /* ########### 
+Appear on scroll
+############# */
+
+.from-left{
+  transform: translateX(-30%);
+  opacity: 0;
+}
+.from-right{
+  transform: translateX(30%);
+  opacity: 0;
+}
+
+.from-right, .from-left{
+  transition: opacity 250ms ease-in, transform 400ms ease-in;
+}
+.from-left.appear,
+.from-right.appear{
+  opacity: 1;
+  transform:translateX(0);
+}
+
+/* ########### 
 Plugins V-toast
 ############# */
 
@@ -78,6 +101,7 @@ Plugins V-toast
 	top: 4rem;
 	right: 0%;
 }
+
 
 
 

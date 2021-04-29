@@ -1,14 +1,11 @@
 <template>
-  <div class="max-w-screen-lg mx-auto">
+  <div class="article text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
     <img :src="getStrapiMedia(article.cover.url)" class="w-full" />
-    <h1 class="text-xl font-semibold py-4">{{ article.title }}</h1>
-
-    <div>
-      <div>
+    <h1>{{ article.title }}</h1>
         <div
           v-if="article.content"
           v-html="$md.render(article.content)"
-          id="article"
+          class="article--body tracking-wide"
         />
         <p class="italic text-right">
           publie le {{ $moment(article.published_at).format("Do MMM YYYY") }}
@@ -61,8 +58,20 @@
 </script>
 
 <style>
-#article p {
-  padding-top: 10px;
-  padding-bottom: 10px;
+.article {
+  padding: 1rem;
+  max-width: 70ch;
+  margin: auto;
+}
+.article h1 {
+  line-height: 1em;
+}
+.article--body {
+  text-align: justify;
+  line-height: 1.6em;
+  margin-top: 1em;
+}
+.article--body > * + * {
+  padding: 1em 0 1em 0;
 }
 </style>
