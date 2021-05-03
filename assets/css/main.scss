@@ -2,19 +2,54 @@
 /* ########### 
 GLOBALS 
 #############*/
+:root {
+  --bg-darker: hsl(171, 56%, 8%);
+  --bg-dark: hsl(171, 56%, 12%);
+  --font-light: hsl(171, 56%, 92%);
+  --bg-light: hsl(171, 56%, 82%);
+  --clr-accent: hsl(142, 67%, 41%);
+  --clr-brand-normal: hsl(142, 67%, 41%);
+  --clr-brand-blue: hsl(193, 67%, 76%);
+  --clr-brand-dark: hsl(159, 64%, 34%);
+  --clr-brand-light: hsl(107, 45%, 56%);
+  --clr-brand-lighter: hsl(107, 45%, 70%);
+  --clr-brand-yellow: hsl(61, 73%, 69%);
+  --clr-font-footer: hsl(159, 64%, 54%);;
+  --clr-brand-darker: hsl(171, 56%, 22%);
+  --p-section: 1.5em;
+  --fz-normal: 1em;
+  --fz-small: 0.75em;
+  --fz-big: 1.5em;
+  --font-dark: hsl(171, 56%, 12%);
+  --font-gray: hsl(171, 52%, 37%);
+  --h-menu:4rem;
+  }
 
 html{
   overflow-x:hidden;
-  min-height: 101%;
 }
-h1{
-  font-weight: 700;
-  font-size: xx-large;
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--clr-brand-darker);
+  font-weight: 800;
 }
-h2{
-  font-weight: 600;
-  font-size: larger;
+h1 {
+  font-size: 4rem;
 }
+h2 {
+  font-size: 2rem;
+  line-height: 90%;
+}
+
+section{
+  max-width:1200px;
+  margin:auto;
+}
+
+
 /* ########### 
 Page transition @nuxt
 #############*/
@@ -35,7 +70,7 @@ a.nuxt-link-active {
   font-weight: bold;
 }
 a.nuxt-link-exact-active {
-  color: #16664f;
+  color: var(--clr-accent);
   pointer-events: none;
 }
 /* ########### 
@@ -43,8 +78,26 @@ Components
 ############# */
 
 .button--action{
-  @apply rounded-full bg-black text-white py-2 px-2 cursor-pointer;
+  @apply rounded-full py-2 px-4 cursor-pointer;
 }
+
+.button--light{
+background-color: var(--bg-light);
+color:var(--clr-brand-darker); 
+}
+
+.button--light:hover{
+background-color: var(--clr-brand-light);
+color:var(--font-dark); 
+}
+
+.date{
+  color:var(--font-gray);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75em;
+}
+
 
 /* ########### 
 Plugins V-formulate
@@ -62,7 +115,7 @@ Plugins V-formulate
   @apply flex flex-wrap justify-between;
 }
 .form-col {
-  @apply flex flex-col min-w-80 max-w-screen-sm pl-4 self-start mx-auto;
+  @apply flex flex-col max-w-screen-sm self-start mx-auto;
 }
 .form-col > * {
   margin-bottom: 0.75rem;
@@ -91,6 +144,20 @@ Appear on scroll
 .from-right.appear{
   opacity: 1;
   transform:translateX(0);
+}
+
+/* ########### 
+Appear on scroll
+############# */
+
+.auth-container{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
 }
 
 /* ########### 

@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-screen-sm mx-auto my-4">
+  <div class="auth-container">
     <h1 class="text-2xl font-semibold text-center mb-4">
       Mot de passe oublié ?
     </h1>

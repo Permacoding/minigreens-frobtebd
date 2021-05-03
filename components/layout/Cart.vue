@@ -68,12 +68,22 @@
 
 <style lang="scss" scoped>
 .cart--sidebar {
-  @apply absolute top-4 right-0 w-64 bg-gray-200 border  border-r-0 border-gray-600 flex flex-col;
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  padding: 0.5rem;
+  background-color: var(--clr-brand-darker);
+  color: var(--font-light);
+  border-radius: 5% 0 0 5%;
+  z-index: 20;
+  display: flex;
+  font-weight: 600;
+  flex-direction: column;
 }
 
 .slide-left-enter-active,
 .slide-left-leave-active {
-  @apply transition duration-300 ease-in;
+  transition: all 300ms ease-in;
 }
 
 .slide-left-enter, .slide-left-leave-to

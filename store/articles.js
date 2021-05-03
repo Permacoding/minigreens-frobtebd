@@ -4,6 +4,7 @@ export const state = () => ({
 
 export const getters = {
     allArticles: (state) => state.allArticles,
+    lastThreeArticles: (state) => state.allArticles.slice(0,2),
     bySlug: (state) => (slug) => {
         return state.allArticles.find(el => el.slug == slug)
     }

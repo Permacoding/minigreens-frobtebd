@@ -1,18 +1,19 @@
 <template>
-  <div class="article text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
-    <img :src="getStrapiMedia(article.cover.url)" class="w-full" />
+  <section class="article text-sm sm:text-base md:text-lg lg:text-xl">
+    <img :src="getStrapiMedia(article.cover.url)" class="article--img" />
+    <div class="img--legend">{{ article.cover.caption }}</div>
     <h1>{{ article.title }}</h1>
-        <div
-          v-if="article.content"
-          v-html="$md.render(article.content)"
-          class="article--body tracking-wide"
-        />
-        <p class="italic text-right">
-          publie le {{ $moment(article.published_at).format("Do MMM YYYY") }}
-        </p>
-      </div>
+    <div>
+      <div
+        v-if="article.content"
+        v-html="$md.render(article.content)"
+        class="article--body"
+      ></div>
+      <p class="date">
+        publié le {{ $moment(article.published_at).format("Do MMM YYYY") }}
+      </p>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -63,8 +64,20 @@
   max-width: 70ch;
   margin: auto;
 }
+.article--img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+.img--legend {
+  font-size: 0.7em;
+  line-height: 1em;
+  color: #786981;
+}
 .article h1 {
   line-height: 1em;
+  margin: 0.25em 0 0.5em 0;
+  font-size: 3em;
 }
 .article--body {
   text-align: justify;

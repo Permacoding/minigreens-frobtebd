@@ -1,18 +1,27 @@
 <template>
-    <nuxt-link :to="'/articles/'+article.slug" class="card--article" :class="index % 2 === 0 ? 'from-right' : 'from-left'">
-      <div><img :src="getStrapiMedia(article.cover.url)" alt="cover article" class="w-full" /></div>
-      <div class="card--body">
-        <h2>{{article.title}}</h2>
-        <p class="flex flex-col self-end">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quaerat
-          quae cum cumque cupiditate vel enim voluptatibus consequatur, repellat,
-          at quasi sequi deserunt minima totam aspernatur. Possimus eum dolorum
-          porro facere nostrum nemo minima alias.
-          <span class="opacity-75 font-bold text-sm self-end mt-2">Publie le {{ $moment(article.published_at).format('DD/MM/YY')}}</span>
-        </p>
-      </div>
+  <nuxt-link
+    :to="'/articles/' + article.slug"
+    class="card--article fade-from-bot"
+  >
+    <img
+      class="card--img"
+      :src="getStrapiMedia(article.cover.url)"
+      :alt="article.cover.alternativeText"
+    />
+    <div class="card--body">
+      <h2>{{ article.title }}</h2>
+      <span class="date"
+        >Publie le
+        {{ $moment(article.published_at).format("DD MMMM yyyy") }}</span
+      >
+      <p v-if="index == 0 || index == 2">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque quaerat
+        quae cum cumque cupiditate vel enim voluptatibus consequatur, repellat,
+        at quasi sequi deserunt minima totam aspernatur. Possimus eum dolorum
+        porro facere nostrum nemo minima alias.
+      </p>
     </div>
-    </nuxt-link>
+  </nuxt-link>
 </template>
 
 <script>
@@ -31,23 +40,33 @@
 </script>
 
 <style>
-.card--article {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 0 0 -1rem;
+h2 {
+  font-size: 1.5em;
+  margin: 0.2em 0 0.1em 0;
 }
 
-.card--article > * {
-  flex: 1 1 350px;
-  margin-left: 1rem;
-  margin-bottom: 2rem;
+.last--article > .card--body > h2 {
+  font-size: 3rem;
 }
-.card--body {
-  display: flex;
-  flex-direction: column;
+.card--img {
+  width: 100%;
+  max-height: 60vh;
+  object-fit: cover;
+}
+medium--article > .card--body > h2 {
+  font-size: 4rem;
+}
+last--article > .card--body > h2 {
+  font-size: 5rem;
+}
+@media (max-width: 400px) {
+  .card--body {
+    padding: 0 0.7em 0 0.7em;
+  }
 }
 .card--body p {
-  text-align: justify;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
+  line-height: 160%;
+  max-width: 60ch;
 }
 </style>

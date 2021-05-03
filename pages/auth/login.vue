@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-screen-xl mx-auto">
+  <div class="auth-container">
     <h1 class="text-2xl font-semibold text-center">Connexion</h1>
     <p class="font-light text-center text-sm mb-6 mt-1">
       Pas encore de compte ?

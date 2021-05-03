@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-screen-xl w-full py-3 m-auto">
+  <div class="auth-container">
     <h1 class="text-3xl font-semibold text-center">Inscription</h1>
     <p class="font-light text-center mb-6 text-sm mt-1">
       Déjà un compte ?

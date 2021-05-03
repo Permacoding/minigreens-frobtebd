@@ -5,52 +5,49 @@
     </nuxt-link>
     <nav class="flex items-center">
       <!-- MENU part only for md+  -->
-      <div class="md:flex hidden">
+      <div class="md:flex hidden menu--desktop">
         <nuxt-link
           v-for="item in menu"
           :key="item.text"
           :to="item.link"
-          class="nav-item-mobile"
+          class="nav-item"
           >{{ item.text }}</nuxt-link
         >
       </div>
       <!-- END MENU part only for sm+  -->
-
-      <!-- Absolute Menu only for mobile if opened -->
-      <transition name="slide-left">
-        <div
-          id="menu--mobile"
-          class="menu--mobile mt-16"
-          v-show="isOpened === 'menu'"
-          v-closable="{
-            exclude: ['hamburger', 'cart', 'menu--mobile', 'cart--sidebar'],
-            handler: 'close',
-          }"
-        >
-          <nuxt-link
-            v-for="item in menu"
-            :key="item.text"
-            :to="item.link"
-            class="nav-item-mobile"
-            >{{ item.text }}</nuxt-link
-          >
-        </div>
-      </transition>
-      <!-- END Absolute Menu only for mobile if opened-->
     </nav>
-    <div class="flex items-center" id="sidebar-mobile">
+
+    <div class="flex items-center w-32 justify-end">
       <HamburgerMenu
-        class="md:hidden mr-2"
+        class="md:hidden mr-4"
         :isMenuOpened="isOpened"
         @update:isOpen="isOpened = $event"
       />
 
-      <Cart
-        class="nav-item"
-        :isCartOpened="isOpened"
-        @update:isOpen="isOpened = $event"
-      />
+      <Cart :isCartOpened="isOpened" @update:isOpen="isOpened = $event" />
     </div>
+
+    <!-- Absolute Menu only for mobile if opened -->
+    <transition name="slide-left">
+      <nav
+        id="menu--mobile"
+        class="menu--mobile mt-16"
+        v-show="isOpened === 'menu'"
+        v-closable="{
+          exclude: ['hamburger', 'cart', 'menu--mobile', 'cart--sidebar'],
+          handler: 'close',
+        }"
+      >
+        <nuxt-link
+          v-for="item in menu"
+          :key="item.text"
+          :to="item.link"
+          class="nav-item"
+          >{{ item.text }}</nuxt-link
+        >
+      </nav>
+    </transition>
+    <!-- END Absolute Menu only for mobile if opened-->
   </header>
 </template>
 
@@ -88,25 +85,97 @@
 
 <style>
 header {
-  @apply flex justify-between z-20 w-full fixed border border-r-0 border-l-0 border-t-0 shadow-sm top-0 right-0 left-0 items-center px-2 h-16;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+  width: 100%;
+  height: var(--h-menu);
+  padding: 0 2rem;
+  border-bottom: 1px solid var(--bg-dark);
+}
+
+.menu--mobile {
+  position: absolute;
+  top: 1rem;
+  bottom: 0;
+  right: 0;
+  border-radius: 5% 0 0 5%;
+  border: 0;
+  overflow: hidden;
+  width: 16rem;
+  color: var(--font-light);
+  background-color: var(--clr-brand-darker);
+  height: max-content;
+}
+.menu--mobile .nuxt-link-active {
+  background: var(--clr-brand-light);
 }
 .nav-item {
-  @apply px-2;
+  display: block;
+  margin: 0.5em 1em;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.11em;
 }
-.nav-item-mobile {
-  @apply px-4 py-2 flex hover:bg-white;
+
+.menu--mobile > .nav-item {
+  padding: 0.75em 1.5em;
+  margin: 0;
 }
-.menu--mobile {
-  @apply absolute top-0 bottom-0 right-0 w-64 bg-gray-200 border border-t-0 border-r-0 border-b-0 border-gray-600 h-screen flex flex-col;
+.menu--mobile > .nav-item:hover,
+.menu--mobile > .nav-item:focus {
+  color: var(--clr-brand-darker);
+  background: var(--bg-light);
+}
+.nav-item::after {
+  content: "";
+  background-color: currentColor;
+  position: absolute;
+}
+
+.menu--desktop > .nav-item::after,
+.menu--desktop > .nav-item:focus::after {
+  height: 0.2em;
+  width: 100%;
+  bottom: 0;
+  right: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 250ms ease-in;
+}
+
+.menu--desktop > .nav-item:hover::after,
+.menu--desktop > .nav-item:focus::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.menu--mobile > .nav-item::after {
+  height: 100%;
+  width: 0.3em;
+  top: 0;
+  left: -0.3em;
+  transition: all 250ms ease-in;
+}
+
+.menu--mobile > .nav-item:hover::after,
+.menu--mobile > .nav-item:focus::after {
+  left: 0;
 }
 
 .slide-left-enter-active,
 .slide-left-leave-active {
-  @apply transition duration-300 ease-in;
+  transition: all 300ms ease-in;
 }
 
-.slide-left-enter, .slide-left-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
+.slide-left-enter,
+.slide-left-leave-to {
   transform: translateX(18rem);
   opacity: 0;
 }
