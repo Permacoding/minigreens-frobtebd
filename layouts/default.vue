@@ -10,6 +10,14 @@
   </div>
 </template>
 
+<script>
+export default {
+  async fetch(){
+    
+  }
+}
+</script>
+
 <style>
 html {
   font-family: Roboto, "Source Sans Pro", -apple-system, BlinkMacSystemFont,

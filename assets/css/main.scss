@@ -2,6 +2,10 @@
 /* ########### 
 GLOBALS 
 #############*/
+@font-face {
+    font-family: "NanumPen";
+    src: local("NanumPen"),url(~assets/NanumPen/NanumPenScript-Regular.ttf) format("truetype");}
+
 :root {
   --bg-darker: hsl(171, 56%, 8%);
   --bg-dark: hsl(171, 56%, 12%);
@@ -14,15 +18,17 @@ GLOBALS
   --clr-brand-light: hsl(107, 45%, 56%);
   --clr-brand-lighter: hsl(107, 45%, 70%);
   --clr-brand-yellow: hsl(61, 73%, 69%);
-  --clr-font-footer: hsl(159, 64%, 54%);;
-  --clr-brand-darker: hsl(171, 56%, 22%);
+  --clr-font-footer: hsl(160, 100%, 90%);;
+  --clr-brand-darker: hsl(170, 56%, 21%);
   --p-section: 1.5em;
   --fz-normal: 1em;
   --fz-small: 0.75em;
   --fz-big: 1.5em;
   --font-dark: hsl(171, 56%, 12%);
-  --font-gray: hsl(171, 52%, 37%);
-  --h-menu:4rem;
+  --font-gray: hsl(172, 12%, 51%);
+  --h-menu:4.5rem;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.55);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   }
 
 html{
@@ -33,7 +39,7 @@ h1,
 h2,
 h3,
 h4 {
-  color: var(--clr-brand-darker);
+  color: var(--bg-dark);
   font-weight: 800;
 }
 h1 {
@@ -45,8 +51,10 @@ h2 {
 }
 
 section{
+  padding: 0 var(--p-section);
   max-width:1200px;
   margin:auto;
+  justify-content: center;
 }
 
 
@@ -66,36 +74,34 @@ Page transition @nuxt
 /* ########### 
 nuxt-link @nuxt
 #############*/
-a.nuxt-link-active {
-  font-weight: bold;
-}
+
 a.nuxt-link-exact-active {
-  color: var(--clr-accent);
-  pointer-events: none;
+  color: var(--clr-brand-normal);
 }
 /* ########### 
 Components
 ############# */
 
 .button--action{
-  @apply rounded-full py-2 px-4 cursor-pointer;
+  @apply rounded-full py-2 px-4 cursor-pointer shadow-md shadow-inner;
 }
 
 .button--light{
 background-color: var(--bg-light);
-color:var(--clr-brand-darker); 
+color:var(--clr-brand-darker);
+box-shadow:  var(--shadow), var(--shadow-inner);
 }
 
 .button--light:hover{
 background-color: var(--clr-brand-light);
 color:var(--font-dark); 
+
 }
 
 .date{
   color:var(--font-gray);
-  font-weight: 700;
-  text-transform: uppercase;
   font-size: 0.75em;
+  font-weight: 600;
 }
 
 

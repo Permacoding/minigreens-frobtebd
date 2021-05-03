@@ -56,7 +56,9 @@ export default {
     component: "fa",
     suffix: true,
     icons: {
-      solid:['faShoppingCart','faTimes','faSignOutAlt']
+      solid:['faShoppingCart','faTimes','faSignOutAlt','faPhoneAlt','faMapMarkerAlt'],
+      regular:['faNewspaper','faEnvelope'],
+      brands:['faFacebook','faInstagram'],
     }
   },
 

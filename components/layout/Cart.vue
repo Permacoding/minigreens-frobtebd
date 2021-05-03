@@ -7,7 +7,7 @@
     >
       <fa-icon icon="shopping-cart" class="text-2xl"></fa-icon>
       <span
-        class="absolute top-0 right-1 -mt-3 -mr-4 px-2 text-center rounded-full bg-gray-200 text-gray-900 text-sm font-bold"
+        class="absolute top-0 right-4 -mt-3 -mr-4 px-2 text-center rounded-full bg-gray-200 text-gray-900 text-sm font-bold"
         >{{ nbCartItems }}</span
       >
     </div>

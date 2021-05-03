@@ -1,42 +1,53 @@
 <template>
   <footer class="footer">
+    <div class="footer-container">
     <div class="company">
-      <p>
-        Minigreens 4 rue du general de gaulle <br />
+      <div class="split">
+        <fa-icon icon="map-marker-alt" style="font-size:20px;" /><br />
+        4 rue du general de gaulle
+        <br />
         Aix en Provence <br />
         France<br />
-        06 12 32 32 32
-        <a href="mailto:contact@minigreens.fr">contact@minigreens.fr</a>
+      </div>
+    
+        <div class="split">
+          <fa-icon icon="phone-alt" style="font-size:20px;" /> 06 12 32 32 32 <br />
+        </div>
+        <div class="split">
+          <fa-icon :icon="['far', 'envelope']"  style="font-size:20px;"/><a href="mailto:contact@minigreens.fr"
+            >contact@minigreens.fr</a
+          ><br />
+        </div>
       </p>
-      <img
-        src="@/assets/logo_fond_blanc.png"
-        class="w-full"
-        alt="logo footer"
-      />
+      <img src="@/assets/logo_fond_blanc.png" alt="logo footer" />
     </div>
     <div class="blog">
-      <span class="text-lg">BLOG</span>
+      <nuxt-link to="/blog" class="nav-item-footer">Blog</nuxt-link>
       <nuxt-link
         v-for="article in lastThreeArticles"
         :key="article.id"
         :to="'/articles/' + article.slug"
-        class="nav-item"
+        class="nav-item-footer"
       >
         {{ article.title }}
       </nuxt-link>
     </div>
-    <div class="menu">
-      <div class="split">
+    <div class="menu--footer">
+      <div >
         <nuxt-link
           v-for="(item, index) in menu"
           :key="index"
           :to="item.link"
-          class="nav-item"
+          class="nav-item-footer"
         >
           {{ item.text }}
         </nuxt-link>
       </div>
-      <div class="split"></div>
+      <div class="social">
+        <fa-icon :icon="['fab', 'facebook']" />
+        <fa-icon :icon="['fab', 'instagram']" />
+      </div>
+    </div>
     </div>
   </footer>
 </template>
@@ -55,8 +66,8 @@
           { text: "La ferme", link: "/farm" },
           { text: "Boutique", link: "/shop" },
           { text: "Contact", link: "/contact" },
-          { text: "Mentions legales", link: "/shop" },
-          { text: "Politique de confidentialite", link: "/shop" },
+          { text: "Mentions legales", link: "/legal" },
+          { text: "Politique de confidentialite", link: "/confidentialite" },
         ],
       };
     },
@@ -64,39 +75,61 @@
 </script>
 
 <style>
+svg {
+  margin-right: 1rem;
+}
+.nav-item-footer {
+  display: block;
+  font-size: 1.1em;
+  margin-top: 0.4em;
+}
+.nav-item-footer:hover {
+  color: var(--clr-brand-light);
+}
+.social {
+  font-size: 2.5rem;
+}
 .footer {
-  padding: 1.5rem;
-  max-width: 100%;
-  background-color: var(--bg-darker);
+  background-color: var(--bg-dark);
+}
+.footer-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 300px));
-  color: var(--clr-font-footer);
+  max-width: 1200px;
+  margin: auto;
+  padding: 1.5rem var(--p-section);
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  color: var(--font-light);
   font-size: 0.9em;
   font-weight: 600;
-  grid-gap: 1.5em;
+  gap: 1.5em;
 }
-.footer > * {
-  padding: 1em;
+.footer-container > * {
+  padding: 0.7em;
+  min-width: 250px;
+  flex-basis: 28%;
+}
+.blog > * + * {
+  margin-top: 0.9em;
+  padding-left: 0.4em;
 }
 .company > * + * {
   margin-top: 1.5em;
 }
-
-.nav-item {
-  margin: 0.5em 1em;
-  font-weight: 600;
-  letter-spacing: 0.11em;
+.company img {
+  max-width: 15em;
 }
 
-.menu {
+.menu--footer {
   display: flex;
   flex-direction: column;
-  align-content: flex-start;
+  align-items: center;
   justify-content: space-around;
-  font-size: 1.2em;
-  padding: 0.5em 1em;
+  gap: 1em;
 }
-a:hover {
-  text-decoration: underline;
+.split {
+  display: flex;
+  align-items: center;
 }
 </style>

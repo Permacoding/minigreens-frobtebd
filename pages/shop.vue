@@ -1,17 +1,43 @@
 <template>
-  <div class="shop">
+  <section class="shop">
+    <div class="filters">
+      <div class="filter-item">
+      <input
+        id="filter--kit"
+        type="checkbox"
+        v-model="filters.types"
+        name="filter_type[]"
+        value="kit"
+      />
+      <label for="filter--kit">Kits</label>
+      </div>
+      <div class="filter-item">
+      <input
+        id="filter--micropousse"
+        type="checkbox"
+        v-model="filters.types"
+        name="filter_type[]"
+        value="micropousse"
+      />
+      <label for="filter--micropousse">Micropousses</label>
+      </div>
+    </div>
+    </div>
     <div
-      class="card--product ml-4 mt-4"
+      class="card--product"
+      :class="product.type"
       v-for="product in products"
       :key="product.id"
     >
       <div
         class="card--image"
-        :style="'background-image: url(' + product.image[0].url + ')'"
+        :style="
+          'background-image: url(' + getStrapiMedia(product.image[0].url) + ')'
+        "
       ></div>
       <div class="card-content"></div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script >
@@ -24,7 +50,16 @@
       global: "global/getGlobal",
       products: "products/allProducts",
     }),
-
+    data() {
+      return {
+        filters: {
+          types: [],
+        },
+      };
+    },
+    methods: {
+      getStrapiMedia,
+    },
     head() {
       const { defaultSeo, favicon, siteName } = this.global;
 
@@ -48,25 +83,54 @@
 
 <style scoped>
 .shop {
-  min-height: 100vh;
   display: flex;
   flex-wrap: wrap;
-  margin: 0 0 0 -1rem;
+  gap: 1em;
+  padding-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+}
+.filters {
+  grid-column: 1/-1;
 }
 
 .card--image {
   width: 100%;
   height: 70%;
-  background-image: url("/uploads/basilic_04397b9cc1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5% 5% 0 0;
+  position: relative;
+  overflow: hidden;
 }
-.shop > * {
-  flex-basis: 33%;
+
+.kit > .card--image::after {
+  content: "KiT";
+  font-family: "NanumPen";
+  position: absolute;
+  right: 0rem;
+  top: 0rem;
+  display: block;
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  color: var(--font-light);
+  box-shadow: 0 6px 4px -1px rgba(0, 0, 0, 0.1),
+    0 4px 2px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 0 20%;
+  padding: 0 0.4em;
+  background-color: hsl(204, 99%, 45%);
 }
+
 .card--product {
   display: flex;
   height: 18em;
-  border-radius: 5%;
-  background: rgb(214, 214, 214);
-  overflow: hidden;
+  border-radius: 2%;
+  background: var(--clr-brand-blue);
+  box-shadow: var(--shadow);
+  transition: all 200ms ease-in-out;
+}
+.card--product:hover {
+  transform: scale(1.05);
 }
 </style>

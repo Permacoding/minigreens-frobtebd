@@ -1,53 +1,87 @@
 <template>
   <header class="bg-white">
-    <nuxt-link to="/">
-      <img src="@/assets/logo.jpg" class="w-32" alt="logo" />
-    </nuxt-link>
-    <nav class="flex items-center">
-      <!-- MENU part only for md+  -->
-      <div class="md:flex hidden menu--desktop">
-        <nuxt-link
-          v-for="item in menu"
-          :key="item.text"
-          :to="item.link"
-          class="nav-item"
-          >{{ item.text }}</nuxt-link
-        >
-      </div>
-      <!-- END MENU part only for sm+  -->
-    </nav>
-
-    <div class="flex items-center w-32 justify-end">
-      <HamburgerMenu
-        class="md:hidden mr-4"
-        :isMenuOpened="isOpened"
-        @update:isOpen="isOpened = $event"
-      />
-
-      <Cart :isCartOpened="isOpened" @update:isOpen="isOpened = $event" />
-    </div>
-
-    <!-- Absolute Menu only for mobile if opened -->
-    <transition name="slide-left">
-      <nav
-        id="menu--mobile"
-        class="menu--mobile mt-16"
-        v-show="isOpened === 'menu'"
-        v-closable="{
-          exclude: ['hamburger', 'cart', 'menu--mobile', 'cart--sidebar'],
-          handler: 'close',
-        }"
-      >
-        <nuxt-link
-          v-for="item in menu"
-          :key="item.text"
-          :to="item.link"
-          class="nav-item"
-          >{{ item.text }}</nuxt-link
-        >
+    <div class="container--header">
+      <nuxt-link to="/">
+        <img src="@/assets/logo.png" class="logo" alt="logo" />
+      </nuxt-link>
+      <nav class="flex items-center">
+        <!-- MENU Dekstop  -->
+        <div class="md:flex hidden menu--desktop">
+          <nuxt-link
+            v-for="item in menu"
+            :key="item.text"
+            :to="item.link"
+            class="nav-item nav-item-desktop"
+            :class="{ 'with--submenu': 'submenu' in item }"
+            >{{ item.text }}
+            <div class="submenu--desktop" v-if="'submenu' in item">
+              <nuxt-link
+                v-for="(submenuItem, index) in item.submenu"
+                :to="submenuItem.link"
+                class="nav-item nav-item-popup"
+                :key="index"
+              >
+                {{ submenuItem.text }}
+              </nuxt-link>
+            </div>
+          </nuxt-link>
+        </div>
+        <!-- END MENU DEsktop  -->
       </nav>
-    </transition>
-    <!-- END Absolute Menu only for mobile if opened-->
+      <div class="flex items-center justify-end">
+        <HamburgerMenu
+          class="md:hidden mr-4"
+          :isMenuOpened="isOpened"
+          @update:isOpen="isOpened = $event"
+        />
+        <Cart :isCartOpened="isOpened" @update:isOpen="isOpened = $event" />
+      </div>
+      <!-- Absolute Menu only for mobile if opened -->
+      <transition name="slide-left">
+        <nav
+          id="menu--mobile"
+          class="menu--mobile mt-16"
+          v-show="isOpened === 'menu'"
+          v-closable="{
+            exclude: ['hamburger', 'cart', 'menu--mobile', 'cart--sidebar'],
+            handler: 'close',
+          }"
+        >
+          <div v-for="item in menu" :key="item.text">
+            <div v-if="'submenu' in item">
+              <input
+                :id="item.text"
+                type="checkbox"
+                class="input-nav-mobile"
+                :value="subMenuOpened === item.text ? '' : item.text"
+                @input="subMenuOpened = $event.target.value"
+                name="submenu"
+              />
+              <label :for="item.text" class="nav-item with--submenu--mobile">{{
+                item.text
+              }}</label>
+              <div class="submenu--mobile" v-show="subMenuOpened == item.text">
+                <nuxt-link :to="item.link" class="nav-item nav-item-popup"
+                  ><span class="ml-4"> Accueil </span></nuxt-link
+                >
+                <nuxt-link
+                  v-for="(submenuItem, index) in item.submenu"
+                  :to="submenuItem.link"
+                  class="nav-item nav-item-popup"
+                  :key="index"
+                >
+                  <span class="ml-4"> {{ submenuItem.text }}</span>
+                </nuxt-link>
+              </div>
+            </div>
+            <nuxt-link v-else :to="item.link" class="nav-item nav-item-popup"
+              >{{ item.text }}
+            </nuxt-link>
+          </div>
+        </nav>
+      </transition>
+      <!-- END Absolute Menu only for mobile if opened-->
+    </div>
   </header>
 </template>
 
@@ -56,10 +90,18 @@
     data() {
       return {
         isOpened: false,
+        subMenuOpened: "",
         menu: [
           { text: "La ferme", link: "/farm" },
           { text: "Blog", link: "/blog" },
-          { text: "Boutique", link: "/shop" },
+          {
+            text: "Boutique",
+            link: "/shop",
+            submenu: [
+              { text: "Micropousses", link: "/shop?type=micropousse" },
+              { text: "Kits", link: "/shop?type=kits" },
+            ],
+          },
           { text: "Contact", link: "/contact" },
         ],
       };
@@ -83,20 +125,32 @@
   };
 </script>
 
-<style>
+<style lang="scss">
 header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   z-index: 20;
   width: 100%;
   height: var(--h-menu);
-  padding: 0 2rem;
-  border-bottom: 1px solid var(--bg-dark);
+  @media (min-width: 1200px) {
+    justify-content: space-around;
+  }
+}
+
+.logo {
+  height: var(--h-menu);
+}
+
+.container--header {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  align-items: center;
+  max-width: 1200px;
+  padding: 0 var(--p-section);
+  height: 100%;
 }
 
 .menu--mobile {
@@ -112,51 +166,84 @@ header {
   background-color: var(--clr-brand-darker);
   height: max-content;
 }
-.menu--mobile .nuxt-link-active {
-  background: var(--clr-brand-light);
-}
+
 .nav-item {
   display: block;
-  margin: 0.5em 1em;
+  padding: 0.5em 1.8em;
   font-weight: 600;
   position: relative;
-  overflow: hidden;
   letter-spacing: 0.11em;
 }
 
-.menu--mobile > .nav-item {
-  padding: 0.75em 1.5em;
-  margin: 0;
+.with--submenu::after,
+.with--submenu--mobile::after {
+  content: "";
+  position: absolute;
+  border: 0.4em solid transparent;
+  border-left-color: currentColor;
+  top: 1em;
+  left: 0.8em;
 }
-.menu--mobile > .nav-item:hover,
-.menu--mobile > .nav-item:focus {
-  color: var(--clr-brand-darker);
-  background: var(--bg-light);
+
+.input-nav-mobile {
+  display: none;
 }
-.nav-item::after {
+
+.with--submenu:hover::after,
+.input-nav-mobile:checked ~ .with--submenu--mobile::after {
+  border-top-color: currentColor;
+  border-left-color: transparent;
+  top: 1.2em;
+  left: 0.55em;
+}
+
+.input-nav-mobile:checked ~ label {
+  color: var(--clr-brand-light);
+}
+
+.nav-item::before {
   content: "";
   background-color: currentColor;
   position: absolute;
 }
 
-.menu--desktop > .nav-item::after,
-.menu--desktop > .nav-item:focus::after {
-  height: 0.2em;
-  width: 100%;
+.nav-item:hover,
+.nav-item:focus {
+  color: var(--clr-brand-normal);
+}
+
+.submenu--desktop,
+.submenu--mobile,
+.with--submenu::after {
+  transition: all 400ms ease-in-out;
+  transition-delay: 200ms;
+}
+.nav-item > .submenu--desktop {
+  border: 1px solid var(--bg-darker);
+  color: var(--font-light);
+  border-radius: 5%;
+  position: absolute;
   bottom: 0;
-  right: 0;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 250ms ease-in;
+  left: 0;
+  top: 3.2em;
+  height: max-content;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;
+  background-color: var(--clr-brand-darker);
 }
 
-.menu--desktop > .nav-item:hover::after,
-.menu--desktop > .nav-item:focus::after {
-  transform: scaleX(1);
-  transform-origin: left;
+.nav-item:hover > .submenu--desktop {
+  opacity: 1;
+  visibility: visible;
 }
 
-.menu--mobile > .nav-item::after {
+nav-item-popup {
+  padding: 0.75em 1.5em;
+  margin: 0;
+}
+
+.nav-item-popup::before {
   height: 100%;
   width: 0.3em;
   top: 0;
@@ -164,8 +251,14 @@ header {
   transition: all 250ms ease-in;
 }
 
-.menu--mobile > .nav-item:hover::after,
-.menu--mobile > .nav-item:focus::after {
+.nav-item-popup:hover,
+.nav-item-popup:focus {
+  color: var(--clr-brand-darker);
+  background: var(--bg-light);
+}
+
+.nav-item-popup:hover::before,
+.nav-item-popup:focus::before {
   left: 0;
 }
 
