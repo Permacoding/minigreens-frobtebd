@@ -7,7 +7,7 @@
     >
       <fa-icon icon="shopping-cart" class="text-2xl"></fa-icon>
       <span
-        class="absolute top-0 right-4 -mt-3 -mr-4 px-2 text-center rounded-full bg-gray-200 text-gray-900 text-sm font-bold"
+        class="absolute top-0 right-0 -mt-3 -mr-4 px-2 text-center rounded-full bg-gray-200 text-gray-900 text-sm font-bold"
         >{{ nbCartItems }}</span
       >
     </div>
@@ -22,7 +22,24 @@
           handler: 'closeCart',
         }"
       >
-        <div v-if="nbCartItems > 0"></div>
+        <div v-if="nbCartItems > 0">
+          <div class="cart-item font-light">
+            <span>Produit</span>
+            <span>Quantité </span>
+            <span>Prix</span>
+          </div>
+          <div
+            class="cart-item"
+            v-for="item in cartItems"
+            :key="item.product.id"
+          >
+            <nuxt-link :to="'/shop/' + item.product.slug">{{
+              item.product.title
+            }}</nuxt-link>
+            <span>{{ item.quantity }} </span>
+            <span>{{ item.product.price * item.quantity }} </span>
+          </div>
+        </div>
         <div
           class="flex h-12 items-center justify-center text-sm border border-dashed border-t-0 border-r-0 border-l-0 border-gray-900 mx-2 my-2"
           v-else
@@ -69,7 +86,7 @@
 <style lang="scss" scoped>
 .cart--sidebar {
   position: absolute;
-  top: 1rem;
+  top: 2rem;
   right: 0;
   padding: 0.5rem;
   background-color: var(--clr-brand-darker);
@@ -79,6 +96,17 @@
   display: flex;
   font-weight: 600;
   flex-direction: column;
+}
+
+.cart-item {
+  display: flex;
+  padding: 0.2rem;
+}
+.cart-item > * {
+  min-width: 5rem;
+  flex-basis: 33%;
+  display: flex;
+  align-items: center;
 }
 
 .slide-left-enter-active,

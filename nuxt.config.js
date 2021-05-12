@@ -33,6 +33,7 @@ export default {
       '~/components',
       '~/components/layout',
       '~/components/atoms',
+      '~/components/sections',
     ]
   },
 
@@ -56,7 +57,7 @@ export default {
     component: "fa",
     suffix: true,
     icons: {
-      solid:['faShoppingCart','faTimes','faSignOutAlt','faPhoneAlt','faMapMarkerAlt'],
+      solid:['faShoppingCart','faCartPlus','faTimes','faSignOutAlt','faPhoneAlt','faMapMarkerAlt','faChevronRight','faChevronLeft'],
       regular:['faNewspaper','faEnvelope'],
       brands:['faFacebook','faInstagram'],
     }

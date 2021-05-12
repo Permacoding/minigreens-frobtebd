@@ -2,7 +2,7 @@
   <div>
     <Navbar />
     <div id="page-container">
-      <div class="min-h-screen">
+      <div>
         <Nuxt />
       </div>
     </div>
@@ -11,11 +11,9 @@
 </template>
 
 <script>
-export default {
-  async fetch(){
-    
-  }
-}
+  export default {
+    async fetch() {},
+  };
 </script>
 
 <style>

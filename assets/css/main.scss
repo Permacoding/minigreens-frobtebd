@@ -3,23 +3,26 @@
 GLOBALS 
 #############*/
 @font-face {
-    font-family: "NanumPen";
-    src: local("NanumPen"),url(~assets/NanumPen/NanumPenScript-Regular.ttf) format("truetype");}
+    font-family: "Satisfy";
+    src: local("Satisfy"),url(~assets/handwriting/Satisfy-Regular.ttf) format("truetype");
+  }
 
 :root {
+  --handwriting: "Satisfy";
   --bg-darker: hsl(171, 56%, 8%);
-  --bg-dark: hsl(171, 56%, 12%);
+  --bg-dark: #0d302b;
   --font-light: hsl(171, 56%, 92%);
   --bg-light: hsl(171, 56%, 82%);
   --clr-accent: hsl(142, 67%, 41%);
-  --clr-brand-normal: hsl(142, 67%, 41%);
+  --clr-brand-normal: #23af56;
   --clr-brand-blue: hsl(193, 67%, 76%);
-  --clr-brand-dark: hsl(159, 64%, 34%);
-  --clr-brand-light: hsl(107, 45%, 56%);
-  --clr-brand-lighter: hsl(107, 45%, 70%);
-  --clr-brand-yellow: hsl(61, 73%, 69%);
-  --clr-font-footer: hsl(160, 100%, 90%);;
-  --clr-brand-darker: hsl(170, 56%, 21%);
+  --clr-brand-dark: #1f8e67;
+  --clr-brand-light: #72c15c;
+  --clr-brand-lighter: rgb(159, 213, 144);
+  --clr-brand-yellow: #e8ea76;
+  --clr-brand-yellow2: hsl(56, 86%, 70%);
+  --clr-font-footer: rgb(204, 255, 238);;
+  --clr-brand-darker: #18544a;
   --p-section: 1.5em;
   --fz-normal: 1em;
   --fz-small: 0.75em;
@@ -27,13 +30,14 @@ GLOBALS
   --font-dark: hsl(171, 56%, 12%);
   --font-gray: hsl(172, 12%, 51%);
   --h-menu:4.5rem;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.55);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
   --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
   }
 
 html{
   overflow-x:hidden;
 }
+
 
 h1,
 h2,
@@ -50,7 +54,7 @@ h2 {
   line-height: 90%;
 }
 
-section{
+.container-section{
   padding: 0 var(--p-section);
   max-width:1200px;
   margin:auto;
@@ -61,6 +65,10 @@ section{
 /* ########### 
 Page transition @nuxt
 #############*/
+
+.handwriting{
+font-family: var(--handwriting);
+}
 
 .page-enter-active,
 .page-leave-active {
@@ -83,7 +91,14 @@ Components
 ############# */
 
 .button--action{
-  @apply rounded-full py-2 px-4 cursor-pointer shadow-md shadow-inner;
+  padding:0.5em 1em;
+  background-color: var(--clr-brand-light);
+  box-shadow:  var(--shadow), var(--shadow-inner);
+  border-radius: 25px;
+  display: inline-block;
+}
+.button--action:hover{
+  background-color: var(--clr-brand-normal);
 }
 
 .button--light{
@@ -153,8 +168,21 @@ Appear on scroll
 }
 
 /* ########### 
-Appear on scroll
+Transition
 ############# */
+
+
+.fade-enter,
+.fade-leave-to{
+  opacity: 0;
+}
+
+.fade-enter-active, 
+.fade-leave-active{
+  transition: opacity 0.8s;
+}
+
+
 
 .auth-container{
   height: 100%;
@@ -171,8 +199,12 @@ Plugins V-toast
 ############# */
 
 .toasted-container.toastContainer.top-right {
-	top: 4rem;
+	top: 2.7rem;
 	right: 0%;
+}
+
+.toasted.toasted-primary.success{
+    background-color:var(--clr-brand-dark) !important;
 }
 
 

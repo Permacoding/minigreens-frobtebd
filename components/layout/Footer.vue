@@ -75,9 +75,6 @@
 </script>
 
 <style>
-svg {
-  margin-right: 1rem;
-}
 .nav-item-footer {
   display: block;
   font-size: 1.1em;
@@ -91,13 +88,14 @@ svg {
 }
 .footer {
   background-color: var(--bg-dark);
+  margin-top: 2.5rem;
 }
 .footer-container {
   display: grid;
   max-width: 1200px;
   margin: auto;
   padding: 1.5rem var(--p-section);
-  justify-content: space-between;
+  justify-content: center;
   display: flex;
   flex-wrap: wrap;
   color: var(--font-light);

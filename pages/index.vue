@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    <HeroSection :slides="homepage.slides" />
+  </div>
 </template>
 
 <script >

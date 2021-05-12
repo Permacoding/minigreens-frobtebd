@@ -13,7 +13,7 @@
       <loading-button
         :loading="loading"
         @click="register()"
-        class="bg-indigo-500 text-gray-200 my-2 w-80 self-end"
+        class="bg-indigo-500 text-gray-200 my-2 w-80 self-end button-default"
         >Mettre à jour</loading-button
       >
     </FormulateForm>

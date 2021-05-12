@@ -1,8 +1,5 @@
 <template>
-  <button
-    class="inline-block text-center relative rounded-md hover:opacity-90 cursor-pointer px-6 py-2 font-semibold shadow-md"
-    @click.prevent="!loading ? $emit('click') : ''"
-  >
+  <button @click.prevent="!loading ? $emit('click') : ''">
     <div :class="{ 'opacity-0': loading }" class="w-full">
       <slot></slot>
     </div>
@@ -35,6 +32,10 @@
 </script>
 
 <style scoped>
+.button-default {
+  @apply inline-block text-center relative rounded-md hover:opacity-90 cursor-pointer px-6 py-2 font-semibold shadow-md;
+}
+
 .sk-fading-circle {
   top: 50%;
   left: 50%;
@@ -58,7 +59,7 @@
   margin: 0 auto;
   width: 15%;
   height: 15%;
-  background-color: #f3f4f6;
+  background-color: var(--clr-brand-darker);
   border-radius: 100%;
   -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
   animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
