@@ -11,8 +11,8 @@ GLOBALS
   --handwriting: "Satisfy";
   --bg-darker: hsl(171, 56%, 8%);
   --bg-dark: #0d302b;
-  --font-light: hsl(171, 56%, 92%);
-  --bg-light: hsl(171, 56%, 82%);
+  --clr-font-light: hsl(171, 56%, 92%);
+  --clr-bg-light: hsl(142, 67%, 96%);
   --clr-accent: hsl(142, 67%, 41%);
   --clr-brand-normal: #23af56;
   --clr-brand-blue: hsl(193, 67%, 76%);
@@ -27,8 +27,8 @@ GLOBALS
   --fz-normal: 1em;
   --fz-small: 0.75em;
   --fz-big: 1.5em;
-  --font-dark: hsl(171, 56%, 12%);
-  --font-gray: hsl(172, 12%, 51%);
+  --clr-font-dark: hsl(171, 56%, 12%);
+  --clr-font-gray: hsl(173, 56%, 28%);
   --h-menu:4.5rem;
   --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
   --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
@@ -61,7 +61,16 @@ h2 {
   justify-content: center;
 }
 
-
+.clickable-background{
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom: 0;
+  z-index: 10;
+  background-color: black;
+  opacity: 0.2;
+}
 /* ########### 
 Page transition @nuxt
 #############*/
@@ -90,15 +99,19 @@ a.nuxt-link-exact-active {
 Components
 ############# */
 
-.button--action{
+.button__action{
   padding:0.5em 1em;
   background-color: var(--clr-brand-light);
   box-shadow:  var(--shadow), var(--shadow-inner);
   border-radius: 25px;
   display: inline-block;
+  color:var(--clr-font-light);
+  letter-spacing:0.2ch;
+  font-weight: 600;
 }
-.button--action:hover{
+.button__action:hover{
   background-color: var(--clr-brand-normal);
+  color: white;
 }
 
 .button--light{
