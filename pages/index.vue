@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeroSection :slides="homepage.slides" />
+    <Caroussel :slides="homepage.slides" />
   </div>
 </template>
 

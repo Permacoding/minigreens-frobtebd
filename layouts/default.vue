@@ -1,16 +1,20 @@
 <template>
   <div>
+    <div
+      class="clickable-background"
+      @click="isOpen = false"
+      v-show="isOpen"
+    ></div>
     <Navbar />
     <div id="page-container">
-      <div>
-        <Nuxt />
-      </div>
+      <Nuxt />
     </div>
     <Footer />
   </div>
 </template>
 
 <script>
+  import { mapGetters } from "vuex";
   export default {
     async fetch() {},
   };
@@ -31,6 +35,7 @@ html {
 
 #page-container {
   padding-top: var(--h-menu);
+  min-height: 100vh;
 }
 
 *,

@@ -1,6 +1,11 @@
 <template>
   <div>
     <div
+      class="clickable-background"
+      @click="isOpen = false"
+      v-show="isOpen"
+    ></div>
+    <div
       id="cart"
       @click="isOpen = isOpen === false ? 'cart' : false"
       class="relative mr-1 cursor-pointer cart"
@@ -13,15 +18,7 @@
     </div>
 
     <transition name="slide-left">
-      <div
-        id="cart--sidebar"
-        class="cart--sidebar mt-16"
-        v-show="isOpen"
-        v-closable="{
-          exclude: ['hamburger', 'cart', 'menu--mobile', 'cart--sidebar'],
-          handler: 'closeCart',
-        }"
-      >
+      <div id="cart--sidebar" class="cart--sidebar mt-16" v-show="isOpen">
         <div v-if="nbCartItems > 0">
           <div class="cart-item font-light">
             <span>Produit</span>
@@ -86,16 +83,17 @@
 <style lang="scss" scoped>
 .cart--sidebar {
   position: absolute;
-  top: 2rem;
+  height: 100vh;
+  top: 0.5rem;
   right: 0;
   padding: 0.5rem;
   background-color: var(--clr-brand-darker);
   color: var(--font-light);
-  border-radius: 5% 0 0 5%;
   z-index: 20;
   display: flex;
   font-weight: 600;
   flex-direction: column;
+  width: 22rem;
 }
 
 .cart-item {
@@ -116,7 +114,7 @@
 
 .slide-left-enter, .slide-left-leave-to
 /* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(18rem);
+  transform: translateX(22rem);
   opacity: 0;
 }
 </style>

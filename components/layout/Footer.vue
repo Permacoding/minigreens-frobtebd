@@ -87,7 +87,7 @@
   font-size: 2.5rem;
 }
 .footer {
-  background-color: var(--bg-dark);
+  background-color: var(--clr-brand-darker);
   margin-top: 2.5rem;
 }
 .footer-container {

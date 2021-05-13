@@ -1,5 +1,5 @@
 <template>
-  <section class="fiche--article">
+  <section class="fiche--article container-section">
     <h1 class="product--title">{{ product.title }}</h1>
     <img class="photo" :src="currentPhoto" />
     <div class="other-photos h-20 items-center">
