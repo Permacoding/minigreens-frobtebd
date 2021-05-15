@@ -58,7 +58,7 @@ export default {
     suffix: true,
     icons: {
       solid:['faShoppingCart','faCartPlus','faTimes','faSignOutAlt','faPhoneAlt','faMapMarkerAlt','faChevronRight','faChevronLeft'],
-      regular:['faNewspaper','faEnvelope'],
+      regular:['faNewspaper','faEnvelope','faTrashAlt'],
       brands:['faFacebook','faInstagram'],
     }
   },

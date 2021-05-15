@@ -2,6 +2,7 @@ export const state = () => ({
     defaultSeo: {},
     favicon:{url:''},
     siteName:null,
+    menu: [],
 })
 
 export const getters = {
@@ -11,6 +12,9 @@ export const getters = {
             favicon:state.favicon,
             siteName:state.siteName,
         } 
+    },
+    getMenu: (state) => {
+        return state.menu;
     }
 }
 
@@ -19,5 +23,6 @@ export const mutations = {
       state.defaultSeo = global.defaultSeo
       state.favicon = global.favicon
       state.siteName = global.siteName
+      state.menu = global.menu
     },
 }

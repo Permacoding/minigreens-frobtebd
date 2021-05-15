@@ -1,3 +1,5 @@
+import { faBreadSlice } from "@fortawesome/free-solid-svg-icons";
+
 export const state = () => ({
     allProducts: [],
     cartItems:[],
@@ -8,12 +10,13 @@ export const getters = {
     bySlug:(state) => (slug) =>{ return state.allProducts.find(el => el.slug == slug ) },
     nbCartItems: (state) => state.cartItems.length,
     getCart: (state) => state.cartItems,
-    getCartTotal: (state) =>
+    getNbCartProducts: (state) => state.cartItems.reduce((total,item) => {return total + item.quantity},0),
+    getCartTotalPrice: (state) =>
     state.cartItems.length < 1
-      ? '0'
+      ? '0,00'
       : state.cartItems
           .map((el) => el.product.price * el.quantity)
-          .reduce((a, b) => a + b),
+          .reduce((a, b) => a + b).toFixed(2),
 }
 
 export const mutations = {
@@ -23,13 +26,15 @@ export const mutations = {
     const quantity = payload.quantity 
     
     const index = state.cartItems.findIndex(el => el.product.id == product.id);
-    console.log(index);
+
     if(index > -1){
       state.cartItems[index].quantity += quantity;
     }else{
       state.cartItems.push(payload)
     }
-  }
-    ,
-  removeCartItem: (state, id) => delete state.product[id],
+  },
+  removeCartItem: (state, id) =>{
+    state.cartItems = state.cartItems.filter(item => item.product.id != id)
+  },
+
 }

@@ -2,8 +2,8 @@
   <div
     id="hamburger"
     class="hamburger flex cursor-pointer"
-    :class="isOpen ? 'hamburger--is-open' : ''"
-    @click="isOpen = isOpen === false ? 'menu' : false"
+    :class="{ 'hamburger--is-open': isOpen }"
+    @click="isOpen = !isOpen"
   >
     <div class="hamburger__item hamburger__item--first"></div>
     <div class="hamburger__item hamburger__item--middle"></div>
@@ -12,10 +12,10 @@
 </template>
 
 <script>
+  import { mapGetters, mapMu } from "vuex";
   export default {
-    name: "Hamburger",
     props: {
-      isMenuOpened: {
+      modalOpenedName: {
         required: true,
       },
     },
@@ -23,7 +23,7 @@
     computed: {
       isOpen: {
         get: function () {
-          return this.isMenuOpened === "menu";
+          return this.modalOpenedName === "menu";
         },
         set: function (value) {
           this.$emit(`update:isOpen`, value);

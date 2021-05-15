@@ -1,12 +1,12 @@
 <template>
   <div>
     <div
-      class="clickable-background"
-      @click="isOpen = false"
-      v-show="isOpen"
+      class="clickable-background opacity-0"
+      @click="closeModal"
+      v-show="isDisplayed"
     ></div>
-    <Navbar />
-    <div id="page-container">
+    <Header />
+    <div class="page-container">
       <Nuxt />
     </div>
     <Footer />
@@ -14,9 +14,22 @@
 </template>
 
 <script>
-  import { mapGetters } from "vuex";
+  import { mapGetters, mapMutations } from "vuex";
   export default {
     async fetch() {},
+    computed: {
+      ...mapGetters({
+        isDisplayed: "modal/isBackgroundDisplayed",
+      }),
+    },
+    methods: {
+      ...mapMutations({
+        closeModal: "modal/closeModal",
+      }),
+      test() {
+        console.log("testr");
+      },
+    },
   };
 </script>
 
@@ -33,15 +46,28 @@ html {
   box-sizing: border-box;
 }
 
-#page-container {
-  padding-top: var(--h-menu);
-  min-height: 100vh;
-}
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
+}
+
+.page-container {
+  padding-top: var(--h-menu);
+  min-height: 100vh;
+}
+
+.clickable-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  background-color: black;
+  opacity: 0.2;
 }
 </style>

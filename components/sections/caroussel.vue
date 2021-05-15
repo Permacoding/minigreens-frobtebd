@@ -122,7 +122,6 @@
   background-size: cover;
   display: flex;
   align-items: center;
-  justify-content: start;
   transition: transform 0.6s;
   bottom: 0;
 }

@@ -9,10 +9,10 @@ GLOBALS
 
 :root {
   --handwriting: "Satisfy";
-  --bg-darker: hsl(171, 56%, 8%);
-  --bg-dark: #0d302b;
+  --clr-bg-darker: hsl(171, 56%, 8%);
+  --clr-bg-dark: #0d302b;
   --clr-font-light: hsl(171, 56%, 92%);
-  --clr-bg-light: hsl(142, 67%, 96%);
+  --clr-bg-light: hsl(142, 67%, 98%);
   --clr-accent: hsl(142, 67%, 41%);
   --clr-brand-normal: #23af56;
   --clr-brand-blue: hsl(193, 67%, 76%);
@@ -61,16 +61,6 @@ h2 {
   justify-content: center;
 }
 
-.clickable-background{
-  position: absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom: 0;
-  z-index: 10;
-  background-color: black;
-  opacity: 0.2;
-}
 /* ########### 
 Page transition @nuxt
 #############*/
@@ -108,11 +98,16 @@ Components
   color:var(--clr-font-light);
   letter-spacing:0.2ch;
   font-weight: 600;
-}
-.button__action:hover{
-  background-color: var(--clr-brand-normal);
+  &:disabled{
+    background-color: gray;
+    cursor: auto;
+  }
+  &:hover:not(:disabled){
+     background-color: var(--clr-brand-normal);
   color: white;
+  }
 }
+
 
 .button--light{
 background-color: var(--bg-light);
@@ -194,6 +189,18 @@ Transition
 .fade-leave-active{
   transition: opacity 0.8s;
 }
+
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 300ms ease-in;
+}
+
+.slide-left-enter,
+.slide-left-leave-to {
+  transform: translateX(100%);
+}
+
 
 
 
