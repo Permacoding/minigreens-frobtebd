@@ -11,7 +11,7 @@
           @input="subMenuOpened = $event.target.value"
           name="submenu"
         />
-        <label :for="item.text" class="nav-item with-submenu">
+        <label :for="item.text" class="nav-item">
           {{ item.text }}
           <fa-icon
             icon="chevron-right"
@@ -19,21 +19,19 @@
             :class="{ rotate: subMenuOpened == item.text }"
           />
         </label>
-        <div class="submenu--mobile" v-show="subMenuOpened == item.text">
-          <nuxt-link :to="item.link" class="nav-item nav-item-popup"
-            ><span class="ml-4">Accueil </span></nuxt-link
-          >
+        <div class="submenu__mobile" v-show="subMenuOpened == item.text">
+          <nuxt-link :to="item.link" class="nav-item">Accueil </nuxt-link>
           <nuxt-link
             v-for="(subMenuItem, index) in item.submenu"
             :to="subMenuItem.link"
-            class="nav-item nav-item-popup"
+            class="nav-item"
             :key="index"
           >
-            <span class="ml-4">{{ subMenuItem.text }}</span>
+            {{ subMenuItem.text }}
           </nuxt-link>
         </div>
       </div>
-      <nuxt-link v-else :to="item.link" class="nav-item nav-item-popup"
+      <nuxt-link v-else :to="item.link" class="nav-item"
         >{{ item.text }}
       </nuxt-link>
     </div>
@@ -75,7 +73,7 @@
     text-align: center;
     color: var(--clr-font-light);
     font-weight: 600;
-    padding: 0.4em 0;
+    padding: 0.8em 0;
     background-color: var(--clr-brand-darker);
   }
   .nav-item {
@@ -104,5 +102,8 @@
   border-right: 0;
   background-color: white;
   height: max-content;
+}
+.submenu__mobile > .nav-item {
+  padding-left: 2.2em;
 }
 </style>
