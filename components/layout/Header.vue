@@ -4,7 +4,7 @@
       <nuxt-link to="/">
         <img src="@/assets/logo.png" class="logo" alt="logo" />
       </nuxt-link>
-      <HeaderMenuDesktop />
+      <HeaderMenuDesktop :menu="menuWithAuth" />
       <div class="icons__right">
         <HeaderHamburger
           class="hamburger__menu"
@@ -18,7 +18,10 @@
       </div>
       <!-- Absolute Menu only for mobile if opened -->
       <transition name="slide-left">
-        <HeaderMenuMobile v-show="modalOpenedName === 'menu'" />
+        <HeaderMenuMobile
+          v-show="modalOpenedName === 'menu'"
+          :menu="menuWithAuth"
+        />
       </transition>
       <transition name="slide-left">
         <HeaderCartSideBar v-show="modalOpenedName === 'cart'" />
@@ -35,7 +38,32 @@
     computed: {
       ...mapGetters({
         modalOpenedName: "modal/getModalOpenedName",
+        menu: "global/getMenu",
       }),
+      menuWithAuth() {
+        let authLinks = [];
+        if (this.$strapi.user) {
+          authLinks.push({
+            link: "/auth/orders",
+            text: "Mon Compte",
+            submenu: [
+              { link: "/auth/orders", text: "Mes commandes" },
+              { text: "Se deconnecter" },
+            ],
+          });
+        } else {
+          authLinks.push({
+            link: "/auth/orders",
+            text: "Mon Compte",
+            submenu: [
+              { link: "/auth/login", text: "se connecter" },
+              { link: "/auth/register", text: "s'inscrire" },
+            ],
+          });
+        }
+
+        return [...this.menu, ...authLinks];
+      },
     },
     methods: {
       ...mapMutations({

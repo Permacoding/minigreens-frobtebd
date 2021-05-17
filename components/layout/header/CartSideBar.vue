@@ -46,12 +46,13 @@
         </div>
         <span class="price--total">{{ cartPrice }} €</span>
       </div>
-      <button
+      <nuxt-link
         class="cart__checkout button__action"
+        to="/auth/orders"
         :disabled="nbCartItems == 0"
       >
-        Paiement
-      </button>
+        Commander
+      </nuxt-link>
     </div>
   </div>
 </template>

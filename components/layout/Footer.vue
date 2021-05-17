@@ -87,26 +87,25 @@
   font-size: 2.5rem;
 }
 .footer {
-  background-color: var(--clr-brand-darker);
-  margin-top: 2.5rem;
+  background-color: var(--clr-bg-darker);
 }
 .footer-container {
   display: grid;
   max-width: 1200px;
-  margin: auto;
-  padding: 1.5rem var(--p-section);
+  margin: 3rem auto 0 auto;
+  padding: 2.5rem var(--p-section);
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
-  color: var(--font-light);
+  color: var(--clr-font-light);
   font-size: 0.9em;
-  font-weight: 600;
+  font-weight: 500;
   gap: 1.5em;
 }
 .footer-container > * {
-  padding: 0.7em;
+  padding: 0.5em;
   min-width: 250px;
-  flex-basis: 28%;
+  flex-basis: 32%;
 }
 .blog > * + * {
   margin-top: 0.9em;
@@ -128,6 +127,7 @@
 }
 .split {
   display: flex;
+  gap: 1em;
   align-items: center;
 }
 </style>

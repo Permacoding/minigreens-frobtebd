@@ -7,14 +7,18 @@
       class="nav-item"
       >{{ item.text }}
       <div class="submenu__desktop" v-if="item.submenu.length > 0">
-        <nuxt-link
+        <div
           v-for="(submenuItem, index) in item.submenu"
-          :to="submenuItem.link"
-          class="submenu__item"
           :key="index"
+          class="submenu__item"
         >
-          {{ submenuItem.text }}
-        </nuxt-link>
+          <nuxt-link v-if="'link' in submenuItem" :to="submenuItem.link">
+            {{ submenuItem.text }}
+          </nuxt-link>
+          <button v-else @click="logout()">
+            {{ submenuItem.text }}
+          </button>
+        </div>
       </div>
     </nuxt-link>
   </nav>
@@ -23,10 +27,24 @@
 <script>
   import { mapGetters } from "vuex";
   export default {
-    computed: {
-      ...mapGetters({
-        menu: "global/getMenu",
-      }),
+    props: {
+      menu: {
+        type: Array,
+        default: [],
+      },
+    },
+
+    methods: {
+      async logout() {
+        this.$loading = true;
+        try {
+          await this.$strapi.logout();
+          if (["auth-profil"].includes(this.$route.name))
+            this.$router.push({ name: "auth-login" });
+          this.$toast.success("Déconnection");
+        } catch {}
+        this.$loading = false;
+      },
     },
   };
 </script>
@@ -51,7 +69,7 @@
   flex-direction: column;
   .submenu__item {
     color: var(--clr-font-light);
-    padding: 0.3em 0.6em;
+    padding: 0.6em 1.2em;
 
     &:hover,
     &:focus {
@@ -68,8 +86,7 @@
     font-weight: 600;
     position: relative;
     letter-spacing: 0.11em;
-    &:hover,
-    &:focus {
+    &:hover {
       color: var(--clr-brand-light);
       .submenu__desktop {
         opacity: 1;

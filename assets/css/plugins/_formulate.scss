@@ -1,0 +1,13 @@
+.formulate-input{
+  min-height: 6.0rem;
+}
+.form__input{
+  border-radius:5px;
+  width:100%;
+  border: 1px solid var(--clr-brand-darker--200);
+  padding:0.5em 0.8em;
+  outline: none;
+  &:focus{
+    border: 1px solid var(--clr-brand-normal);
+  }
+}

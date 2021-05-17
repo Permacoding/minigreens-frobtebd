@@ -1,0 +1,8 @@
+@font-face {
+    font-family: "Satisfy";
+    src: local("Satisfy"),url(~assets/handwriting/Satisfy-Regular.ttf) format("truetype");
+  }
+
+  .handwriting{
+font-family: var(--handwriting);
+}

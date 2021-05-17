@@ -21,14 +21,18 @@
         </label>
         <div class="submenu__mobile" v-show="subMenuOpened == item.text">
           <nuxt-link :to="item.link" class="nav-item">Accueil </nuxt-link>
-          <nuxt-link
-            v-for="(subMenuItem, index) in item.submenu"
-            :to="subMenuItem.link"
-            class="nav-item"
+          <div
+            v-for="(submenuItem, index) in item.submenu"
             :key="index"
+            class="nav-item"
           >
-            {{ subMenuItem.text }}
-          </nuxt-link>
+            <nuxt-link v-if="'link' in submenuItem" :to="submenuItem.link">
+              {{ submenuItem.text }}
+            </nuxt-link>
+            <button v-else @click="logout()">
+              {{ submenuItem.text }}
+            </button>
+          </div>
         </div>
       </div>
       <nuxt-link v-else :to="item.link" class="nav-item"
@@ -46,10 +50,23 @@
         subMenuOpened: "",
       };
     },
-    computed: {
-      ...mapGetters({
-        menu: "global/getMenu",
-      }),
+    methods: {
+      async logout() {
+        this.$loading = true;
+        try {
+          await this.$strapi.logout();
+          if (["auth-profil"].includes(this.$route.name))
+            this.$router.push({ name: "auth-login" });
+          this.$toast.success("Déconnection");
+        } catch {}
+        this.$loading = false;
+      },
+    },
+    props: {
+      menu: {
+        type: Array,
+        default: [],
+      },
     },
   };
 </script>

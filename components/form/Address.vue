@@ -1,47 +1,44 @@
 <template>
-  <div>
-    <h2 class="mb-4">
-      <slot></slot>
-    </h2>
-    <div class="form-line" v-if="withName">
+  <div class="address">
+    <div class="form-line">
       <FormulateInput
         type="text"
-        name="name"
+        :name="'last_name' + suffix"
         label="Nom *"
         validation-name="Nom "
         validation="required"
-        class="mr-2 min-w-44 max-w-72 flex-grow"
+        class="min-w-44"
       />
       <FormulateInput
         type="text"
-        name="fname"
+        :name="'first_name' + suffix"
         label="Prénom *"
         validation-name="Prenom"
         validation="required"
-        class="mr-2 min-w-44 max-w-72 flex-grow"
+        class="min-w-44"
       />
     </div>
     <FormulateInput
       type="text"
-      name="num"
+      :name="'street' + suffix"
       label="Numéro et nom de rue  *"
       validation-name="nom de rue"
       validation="required"
-      class="mr-2 flex-grow"
+      class=""
     />
 
     <FormulateInput
       type="text"
-      name="num"
+      :name="'zipCode' + suffix"
       label="Code postal  *"
       validation-name="code postal"
       validation="required"
-      class="mr-2 flex-grow max-w-48"
+      class="max-w-48"
     />
 
     <FormulateInput
       type="text"
-      name="num"
+      :name="'city' + suffix"
       label="Ville  *"
       validation-name="Ville"
       validation="required"
@@ -50,7 +47,7 @@
 
     <FormulateInput
       type="text"
-      name="num"
+      :name="'phone' + suffix"
       label="Téléphone *"
       validation-name="Telephone"
       validation="required"
@@ -62,9 +59,9 @@
 <script>
   export default {
     props: {
-      withName: {
-        type: Boolean,
-        default: false,
+      suffix: {
+        type: String,
+        default: "",
       },
     },
   };

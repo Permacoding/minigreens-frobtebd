@@ -1,49 +1,67 @@
 <template>
   <section class="shop container-section">
-    <div class="filters">
+    <!--  <div class="filters">
       <div class="filter-item">
-      <input
-        id="filter--kit"
-        type="checkbox"
-        v-model="filters.types"
-        name="filter_type[]"
-        value="kit"
-      />
-      <label for="filter--kit" class="handwriting label-checkmark">kits</label>
+        <input
+          id="filter--kit"
+          type="checkbox"
+          v-model="filters.types"
+          name="filter_type[]"
+          value="kit"
+        />
+        <label for="filter--kit" class="handwriting label-checkmark"
+          >kits</label
+        >
       </div>
       <div class="filter-item">
-      <input
-        id="filter--micropousse"
-        type="checkbox"
-        v-model="filters.types"
-        name="filter_type[]"
-        value="micropousse"
-      />
-      <label for="filter--micropousse" class="handwriting label-checkmark">micropousses</label>
+        <input
+          id="filter--micropousse"
+          type="checkbox"
+          v-model="filters.types"
+          name="filter_type[]"
+          value="micropousse"
+        />
+        <label for="filter--micropousse" class="handwriting label-checkmark"
+          >micropousses</label
+        >
       </div>
-    </div>
-    </div>
+    </div> -->
     <div
-      class="card--product"
-      :class="product.type"
+      class="card__product"
+      @mouseenter="hover = product.id"
+      @mouseleave="hover = null"
+      :class="{ 'card__product--full': product.type == 'kit' }"
       v-for="product in products"
       :key="product.id"
     >
-      <div
-        class="card--image"
-        :style="
-          'background-image: url(' + getStrapiMedia(product.images[0].url) + ')'
-        "
-      ></div>
-      <div class="card--content">
-        <nuxt-link class="info" :to="'/shop/'+product.slug">
-        <h3 class="product-name">{{ product.title }}</h3>
-        <span class="product-price">{{ product.price }}</span>
-        </nuxt-link>
-        <loading-button :loading="loading" class="add-to-cart" @click="addToCart({product:product, quantity:1})" title="ajouter au panier">
-         <fa-icon icon="cart-plus" />
-        </loading-button>
-      </div>
+      <nuxt-link :to="'/shop/' + product.slug" class="link__wrapper">
+        <div
+          class="card__image"
+          :style="
+            'background-image: url(' +
+            getStrapiMedia(product.images[1].url) +
+            ')'
+          "
+        >
+          <transition-group name="fade">
+            <img
+              :src="getStrapiMedia(product.images[0].url)"
+              v-if="hover != product.id"
+              alt="img-top"
+              key="first"
+            />
+          </transition-group>
+        </div>
+        <div class="card__content">
+          <h3
+            class="product__name"
+            :class="{ 'product__name--hover': hover == product.id }"
+          >
+            {{ product.title }}
+          </h3>
+          <span class="product__price">{{ product.price.toFixed(2) }}</span>
+        </div>
+      </nuxt-link>
     </div>
   </section>
 </template>
@@ -60,21 +78,12 @@
     }),
     data() {
       return {
+        hover: null,
         loading: false,
-        filters: {
-          types: [],
-        },
       };
     },
     methods: {
       getStrapiMedia,
-      addToCart(payload) {
-        this.loading = true;
-        this.addCartItem(payload);
-        this.$toast.success("Produit ajouté au panier.");
-        this.loading = false;
-      },
-      ...mapMutations({ addCartItem: "products/addCartItem" }),
     },
     head() {
       const { defaultSeo, favicon, siteName } = this.global;
@@ -97,102 +106,77 @@
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.link__wrapper {
+  height: 22rem;
+}
 .shop {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5em;
   padding-top: 2rem;
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-flow: dense;
 }
 
 .filters {
   grid-column: 1/-1;
 }
 
-.card--image {
-  width: 100%;
-  height: 80%;
+.card__product {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 400ms ease-in-out;
+  @media (min-width: 700px) {
+    &--full {
+      grid-column: span 2;
+    }
+  }
+}
+
+.card__image {
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  background-origin: center;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  width: 100%;
+  height: 80%;
   position: relative;
   overflow: hidden;
 }
 
-.kit > .card--image::after {
-  content: "kit";
-  font-family: var(--handwriting);
-  position: absolute;
-  right: 0rem;
-  top: 0rem;
-  display: block;
-  font-size: 1.4rem;
-  letter-spacing: 0.1em;
-  color: var(--font-light);
-  box-shadow: 0 6px 4px -1px rgba(0, 0, 0, 0.1),
-    0 4px 2px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 0 0 0 20%;
-  padding: 0 0.4em;
-  background-color: var(--clr-brand-dark);
-}
-
-.card--product {
-  display: flex;
-  flex-direction: column;
-  height: 18em;
-  border-radius: 2%;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  transition: all 400ms ease-in-out;
-}
-
-.card--content {
+.card__content {
+  font-size: 1.6rem;
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
-}
-.info {
-  padding: 0.2rem 0.4rem;
-  width: 100%;
-}
-
-.info:hover > .product-name {
-  text-decoration: underline;
-}
-
-.card--product:hover > .card--content > .add-to-cart {
-  opacity: 1;
-  transform: translateX(0%);
-}
-
-.add-to-cart {
-  transition: all 0.3s;
-  opacity: 0;
-  position: relative;
-  font-size: 1.7rem;
-  width: 4rem;
-  height: 100%;
   color: var(--clr-brand-darker);
-  display: flex;
-  align-items: center;
-  transform: translateX(100%);
-  background-color: var(--clr-brand-yellow2);
 }
 
-.product-name {
-  font-weight: 600;
+.product__name {
+  letter-spacing: 0.1ch;
+  font-weight: 700;
+  text-transform: uppercase;
+  &--hover {
+    text-decoration: underline;
+  }
 }
-.product-price {
-  color: var(--clr-brand-dark);
-  letter-spacing: 0.09rem;
+.product__is__hover .product__price {
+  font-weight: 300;
 }
-.product-price:after {
+.product__price:after {
   content: "€";
 }
 
-.filters {
+/* .filters {
   display: flex;
   justify-content: center;
   margin: 0.2em 0;
@@ -237,5 +221,5 @@
 .filter-item input:checked ~ .label-checkmark::after {
   opacity: 1;
   transform: translate(80%, 90%) rotate(40deg) scale(1);
-}
+} */
 </style>

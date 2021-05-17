@@ -5,9 +5,9 @@ export default{
     locale:'fr',
     classes:{
         wrapper:['w-full'],
-        input: ['rounded-md border py-2 px-3 bg-white outline-under w-full shadow-sm'],
+        input: ['form__input'],
         element:['my-1'],
-        errors: ['text-red-400 text-xs px-1 pb-2'],
+        errors: ['text-red-400 text-xs px-1'],
         label:[''],
     }
 }

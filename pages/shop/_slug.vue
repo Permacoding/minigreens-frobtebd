@@ -18,6 +18,15 @@
         <span class="price">{{ product.price }}€</span
         ><span class="unite">unité</span>
       </div>
+      <div class="product__add_to_cart">
+        <number-input @changeNumber="nbProductToAdd = $event"></number-input>
+        <loading-button
+          :loading="loading"
+          @click="addToCart({ product: product, quantity: nbProductToAdd })"
+          class="button__action text-lg"
+          >Ajouter au panier</loading-button
+        >
+      </div>
     </div>
     <div class="description">
       <h2 class="h2-product">Description</h2>
@@ -56,12 +65,14 @@
 <script >
   import { getStrapiMedia } from "@/utils/medias";
   import { getMetaTags } from "@/utils/seo";
-  import { mapGetters } from "vuex";
+  import { mapGetters, mapMutations } from "vuex";
 
   export default {
     data() {
       return {
         currentIndexPhoto: 0,
+        nbProductToAdd: 1,
+        loading: false,
       };
     },
     computed: {
@@ -84,6 +95,13 @@
         const colorClass = ["light", "dark", "darker", "normal"];
         return colorClass[(colorClass.length + 1) % (index + 1)];
       },
+      addToCart(payload) {
+        this.loading = true;
+        this.addCartItem(payload);
+        this.$toast.success("Produit ajouté au panier.");
+        this.loading = false;
+      },
+      ...mapMutations({ addCartItem: "products/addCartItem" }),
     },
     head() {
       const { defaultSeo, favicon, siteName } = this.global;
@@ -140,6 +158,7 @@
       "benefices"
       "recipes"
       "conseils";
+    gap: 1rem;
   }
 }
 .conseils {
@@ -180,9 +199,16 @@
 .description {
   grid-area: description;
 }
+.product__add_to_cart {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
 .infos-price {
   grid-area: price;
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   align-items: center;
   justify-content: space-between;
 }
@@ -222,7 +248,7 @@
 .photo {
   grid-area: top-photo;
   width: 100%;
-  height: 100%;
+  height: min(400px, 100vw);
   object-fit: cover;
 }
 .other-photo-item {

@@ -1,42 +1,38 @@
 <template>
-  <div class="auth-container">
+  <div class="container-section">
     <h1 class="text-2xl font-semibold text-center">Connexion</h1>
     <p class="font-light text-center text-sm mb-6 mt-1">
       Pas encore de compte ?
       <nuxt-link to="/auth/register" class="link">Inscription</nuxt-link>
     </p>
-    <FormulateForm v-model="formValues" class="flex flex-col">
-      <div class="form-col">
-        <FormulateInput
-          type="email"
-          name="identifier"
-          label="Email"
-          validation="required|email"
-          :input-class="'w-full'"
-          class="max-w-88"
-        />
+    <FormulateForm v-model="formValues" class="max-w-88 m-auto flex flex-col">
+      <FormulateInput
+        type="email"
+        name="identifier"
+        label="Email"
+        validation="required|email"
+        class="max-w-88"
+      />
 
-        <FormulateInput
-          type="password"
-          name="password"
-          label="Mot de passe"
-          validation="required|min:6,length"
-          validation-name="Mot de passe"
-          class="max-w-80"
-          :input-class="'w-full'"
-        />
-        <loading-button
-          :loading="loading"
-          @click="login()"
-          class="bg-indigo-500 text-gray-200 mt-4"
-          >Se connecter</loading-button
-        >
-        <nuxt-link
-          to="/auth/forgottenPassword"
-          class="self-center font-light mt-2 text-sm link"
-          >Mot de passe oublie ?</nuxt-link
-        >
-      </div>
+      <FormulateInput
+        type="password"
+        name="password"
+        label="Mot de passe"
+        validation="required|min:6,length"
+        validation-name="Mot de passe"
+        class="max-w-80"
+      />
+      <loading-button
+        :loading="loading"
+        @click="login()"
+        class="button__action text-lg self-center min-w-76 mt-4"
+        >Se connecter</loading-button
+      >
+      <nuxt-link
+        to="/auth/forgottenPassword"
+        class="self-center font-light mt-2 text-sm link"
+        >Mot de passe oublie ?</nuxt-link
+      >
     </FormulateForm>
   </div>
 </template>

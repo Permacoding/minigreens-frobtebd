@@ -1,11 +1,4 @@
 
-/* ########### 
-GLOBALS 
-#############*/
-@font-face {
-    font-family: "Satisfy";
-    src: local("Satisfy"),url(~assets/handwriting/Satisfy-Regular.ttf) format("truetype");
-  }
 
 :root {
   --handwriting: "Satisfy";
@@ -23,6 +16,7 @@ GLOBALS
   --clr-brand-yellow2: hsl(56, 86%, 70%);
   --clr-font-footer: rgb(204, 255, 238);;
   --clr-brand-darker: #18544a;
+  --clr-brand-darker--200: hsl(170, 56%, 61%);
   --p-section: 1.5em;
   --fz-normal: 1em;
   --fz-small: 0.75em;
@@ -30,9 +24,11 @@ GLOBALS
   --clr-font-dark: hsl(171, 56%, 12%);
   --clr-font-gray: hsl(173, 56%, 28%);
   --h-menu:4.5rem;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.07);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.08);
   }
+
+  
 
 html{
   overflow-x:hidden;
@@ -54,29 +50,8 @@ h2 {
   line-height: 90%;
 }
 
-.container-section{
-  padding: 0 var(--p-section);
-  max-width:1200px;
-  margin:auto;
-  justify-content: center;
-}
 
-/* ########### 
-Page transition @nuxt
-#############*/
 
-.handwriting{
-font-family: var(--handwriting);
-}
-
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.5s;
-}
-.page-enter,
-.page-leave-to {
-  opacity: 0;
-}
 
 /* ########### 
 nuxt-link @nuxt
@@ -85,147 +60,21 @@ nuxt-link @nuxt
 a.nuxt-link-exact-active {
   color: var(--clr-brand-normal);
 }
-/* ########### 
-Components
-############# */
-
-.button__action{
-  padding:0.5em 1em;
-  background-color: var(--clr-brand-light);
-  box-shadow:  var(--shadow), var(--shadow-inner);
-  border-radius: 25px;
-  display: inline-block;
-  color:var(--clr-font-light);
-  letter-spacing:0.2ch;
-  font-weight: 600;
-  &:disabled{
-    background-color: gray;
-    cursor: auto;
-  }
-  &:hover:not(:disabled){
-     background-color: var(--clr-brand-normal);
-  color: white;
-  }
-}
-
-
-.button--light{
-background-color: var(--bg-light);
-color:var(--clr-brand-darker);
-box-shadow:  var(--shadow), var(--shadow-inner);
-}
-
-.button--light:hover{
-background-color: var(--clr-brand-light);
-color:var(--font-dark); 
-
-}
-
-.date{
-  color:var(--font-gray);
-  font-size: 0.75em;
-  font-weight: 600;
-}
-
-
-/* ########### 
-Plugins V-formulate
-############# */
-
-.formulate-input-element input{
-    @apply rounded-md border py-1 px-2 bg-white outline-none;
-}
-
-.form-2-col {
-  @apply flex  flex-wrap flex-1 w-full;
-}
-
-.form-line {
-  @apply flex flex-wrap justify-between;
-}
-.form-col {
-  @apply flex flex-col max-w-screen-sm self-start mx-auto;
-}
-.form-col > * {
-  margin-bottom: 0.75rem;
-}
-.form-2-col > * {
-  flex-basis: 50%;
-}
-
-/* ########### 
-Appear on scroll
-############# */
-
-.from-left{
-  transform: translateX(-30%);
-  opacity: 0;
-}
-.from-right{
-  transform: translateX(30%);
-  opacity: 0;
-}
-
-.from-right, .from-left{
-  transition: opacity 250ms ease-in, transform 400ms ease-in;
-}
-.from-left.appear,
-.from-right.appear{
-  opacity: 1;
-  transform:translateX(0);
-}
-
-/* ########### 
-Transition
-############# */
-
-
-.fade-enter,
-.fade-leave-to{
-  opacity: 0;
-}
-
-.fade-enter-active, 
-.fade-leave-active{
-  transition: opacity 0.8s;
-}
-
-
-.slide-left-enter-active,
-.slide-left-leave-active {
-  transition: all 300ms ease-in;
-}
-
-.slide-left-enter,
-.slide-left-leave-to {
-  transform: translateX(100%);
-}
 
 
 
 
-.auth-container{
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 
-}
 
-/* ########### 
-Plugins V-toast
-############# */
 
-.toasted-container.toastContainer.top-right {
-	top: 2.7rem;
-	right: 0%;
-}
 
-.toasted.toasted-primary.success{
-    background-color:var(--clr-brand-dark) !important;
-}
+
+
+
+
+
+
+
 
 
 
