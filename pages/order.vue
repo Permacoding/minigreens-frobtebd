@@ -2,7 +2,7 @@
   <div class="container-section order">
     <div class="order__header">
       <h1>Ma Commande</h1>
-      <nuxt-link to="/login" class="button__action--secondary--light"
+      <nuxt-link to="/auth/login" class="button__action--secondary--light"
         >Déjà un compte ? Connectez-vous.</nuxt-link
       >
     </div>

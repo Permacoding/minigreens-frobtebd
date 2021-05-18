@@ -62,13 +62,7 @@
 
     data() {
       return {
-        menu: [
-          { text: "La ferme", link: "/farm" },
-          { text: "Boutique", link: "/shop" },
-          { text: "Contact", link: "/contact" },
-          { text: "Mentions legales", link: "/legal" },
-          { text: "Politique de confidentialite", link: "/confidentialite" },
-        ],
+        menu: [],
       };
     },
   };
