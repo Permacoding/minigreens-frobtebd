@@ -35,6 +35,15 @@ html{
 }
 
 
+body.modal-open{
+  height: 100vh;
+  overflow: hidden;
+  padding-right:17px;
+}
+header.modal-open{
+  padding-right:17px;
+}
+
 h1,
 h2,
 h3,

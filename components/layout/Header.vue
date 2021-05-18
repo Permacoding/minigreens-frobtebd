@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header :class="{ 'modal-open': modalOpenedName != '' }">
     <div class="container--header">
       <nuxt-link to="/">
         <img src="@/assets/logo.png" class="logo" alt="logo" />

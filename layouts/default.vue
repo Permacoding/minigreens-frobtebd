@@ -26,8 +26,14 @@
       ...mapMutations({
         closeModal: "modal/closeModal",
       }),
-      test() {
-        console.log("testr");
+    },
+    watch: {
+      isDisplayed(newValue, oldValue) {
+        if (newValue) {
+          document.body.classList.add("modal-open");
+        } else {
+          document.body.classList.remove("modal-open");
+        }
       },
     },
   };
