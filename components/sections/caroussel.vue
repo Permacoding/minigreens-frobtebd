@@ -157,7 +157,6 @@
   left: 50%;
   bottom: 1rem;
   transform: translateX(-50%);
-  gap: 1em;
   align-items: center;
   z-index: 10;
 }
@@ -165,10 +164,13 @@
 .carousel__indicator {
   width: 1rem;
   height: 1rem;
+  margin-right: 1em;
   background-color: var(--clr-brand-darker);
   opacity: 0.4;
   border-radius: 50%;
-
+  & + * {
+    margin-right: 1rem;
+  }
   &:hover {
     opacity: 1;
   }
