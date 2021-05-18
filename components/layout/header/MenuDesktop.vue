@@ -7,15 +7,15 @@
       class="nav-item"
       >{{ item.text }}
       <div class="submenu__desktop" v-if="item.submenu.length > 0">
-        <div
-          v-for="(submenuItem, index) in item.submenu"
-          :key="index"
-          class="submenu__item"
-        >
-          <nuxt-link v-if="'link' in submenuItem" :to="submenuItem.link">
+        <div v-for="(submenuItem, index) in item.submenu" :key="index">
+          <nuxt-link
+            class="submenu__item"
+            v-if="'link' in submenuItem"
+            :to="submenuItem.link"
+          >
             {{ submenuItem.text }}
           </nuxt-link>
-          <button v-else @click="logout()">
+          <button v-else @click="logout()" class="submenu__item">
             {{ submenuItem.text }}
           </button>
         </div>
@@ -61,21 +61,21 @@
   opacity: 0;
   visibility: hidden;
   height: max-content;
-  width: max-content;
   background-color: var(--clr-brand-darker);
   transition: all 0.3s ease-in-out;
   transition-delay: 150ms;
   display: flex;
   flex-direction: column;
-  .submenu__item {
-    color: var(--clr-font-light);
-    padding: 0.6em 1.2em;
+}
+.submenu__item {
+  display: flex;
+  color: var(--clr-font-light);
+  padding: 0.6em 1.2em;
 
-    &:hover,
-    &:focus {
-      background-color: var(--clr-font-light);
-      color: var(--clr-font-dark);
-    }
+  &:hover,
+  &:focus {
+    background-color: var(--clr-font-light);
+    color: var(--clr-font-dark);
   }
 }
 
