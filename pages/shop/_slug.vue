@@ -201,8 +201,11 @@
 }
 .product__add_to_cart {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
+}
+.product__add_to_cart > * {
+  margin: 1rem 1rem 1rem 0;
 }
 .infos-price {
   grid-area: price;
