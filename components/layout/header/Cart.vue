@@ -35,7 +35,6 @@
   position: relative;
   cursor: pointer;
   font-size: 1.7em;
-  margin-bottom: 0.25em;
   .badge--nb--items {
     position: absolute;
     top: -0.5em;
