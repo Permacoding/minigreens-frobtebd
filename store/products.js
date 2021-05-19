@@ -17,6 +17,18 @@ export const getters = {
       : state.cartItems
           .map((el) => el.product.price * el.quantity)
           .reduce((a, b) => a + b).toFixed(2),
+    chooseRandom : (state)  => (number = 1 ) => {
+      const res = [];
+      for(let i = 0; i < number; ){
+        const random = Math.floor(Math.random() * state.allProducts.length)
+        if(res.indexOf(state.allProducts[random]) !== -1){
+            continue
+        }
+        res.push(state.allProducts[random])
+        i++
+   }
+   return res;
+  }
 }
 
 export const mutations = {

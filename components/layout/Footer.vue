@@ -3,49 +3,49 @@
     <div class="footer-container">
     <div class="company">
       <div class="split">
-        <fa-icon icon="map-marker-alt" style="font-size:20px;" /><br />
-        4 rue du general de gaulle
-        <br />
-        Aix en Provence <br />
-        France<br />
+        <fa-icon icon="map-marker-alt" style="font-size:20px;" />
+        <p v-html="$md.render(address)">
+        </p>
       </div>
     
         <div class="split">
-          <fa-icon icon="phone-alt" style="font-size:20px;" /> 06 12 32 32 32 <br />
+          <fa-icon icon="phone-alt" style="font-size:20px;" /> 
+          <p>{{ phone }} </p>
         </div>
         <div class="split">
-          <fa-icon :icon="['far', 'envelope']"  style="font-size:20px;"/><a href="mailto:contact@minigreens.fr"
-            >contact@minigreens.fr</a
+          <fa-icon :icon="['far', 'envelope']"  style="font-size:20px;"/>
+          <a href="mailto:contact@minigreens.fr"
+            >{{ email }}</a
           ><br />
         </div>
       </p>
       <img src="@/assets/logo_fond_blanc.png" alt="logo footer" />
     </div>
     <div class="blog">
-      <nuxt-link to="/blog" class="nav-item-footer">Blog</nuxt-link>
+      <h3 class="nav__item__footer title__section__footer">Meilleurs ventes</h3>
       <nuxt-link
-        v-for="article in lastThreeArticles"
-        :key="article.id"
-        :to="'/articles/' + article.slug"
-        class="nav-item-footer"
+        v-for="product in bestSell(3)"
+        :key="product.id"
+        :to="'/shop/' + product.slug"
+        class="nav__item__footer"
       >
-        {{ article.title }}
+        {{ product.title }}
       </nuxt-link>
     </div>
-    <div class="menu--footer">
+    <div class="menu__footer">
       <div >
         <nuxt-link
-          v-for="(item, index) in menu"
+          v-for="(item, index) in menuWithLegal"
           :key="index"
           :to="item.link"
-          class="nav-item-footer"
+          class="nav__item__footer"
         >
           {{ item.text }}
         </nuxt-link>
       </div>
       <div class="social">
-        <fa-icon :icon="['fab', 'facebook']" />
-        <fa-icon :icon="['fab', 'instagram']" />
+       <a :href="facebook"> <fa-icon :icon="['fab', 'facebook']" /></a>
+       <a :href="instagram"> <fa-icon :icon="['fab', 'instagram']" /></a>
       </div>
     </div>
     </div>
@@ -56,25 +56,37 @@
   import { mapGetters } from "vuex";
 
   export default {
-    computed: mapGetters({
-      lastThreeArticles: "articles/lastThreeArticles",
-    }),
+    computed: {
+      ...mapGetters({
+        lastThreeArticles: "articles/lastThreeArticles",
+        instagram: "contact/getInstagram",
+        facebook: "contact/getFacebook",
+        phone: "contact/getPhone",
+        email: "contact/getEmail",
+        address: "contact/getAddress",
+        menu: "global/getMenu",
+        bestSell: "products/chooseRandom",
+      }),
 
-    data() {
-      return {
-        menu: [],
-      };
+      menuWithLegal() {
+        const LegalLinks = [
+          { text: "Mentions Légales", link: "/legal" },
+          { text: "Politique de confidentialité", link: "/confidentialite" },
+        ];
+
+        return [...this.menu, ...LegalLinks];
+      },
     },
   };
 </script>
 
 <style>
-.nav-item-footer {
+.nav__item__footer {
   display: block;
   font-size: 1.1em;
   margin-top: 0.4em;
 }
-.nav-item-footer:hover {
+.nav__item__footer:hover {
   color: var(--clr-brand-light);
 }
 .social {
@@ -92,7 +104,7 @@
   display: flex;
   flex-wrap: wrap;
   color: var(--clr-font-light);
-  font-size: 0.9em;
+  font-size: 0.9rem;
   font-weight: 500;
   gap: 1.5em;
 }
@@ -121,7 +133,14 @@
 }
 .split {
   display: flex;
-  gap: 1em;
   align-items: center;
+}
+.split > * + * {
+  margin-left: 1.5rem;
+}
+.title__section__footer {
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.1rem;
 }
 </style>

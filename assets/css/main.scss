@@ -39,15 +39,8 @@ html{
 body.modal-open{
   height: 100vh;
   overflow: hidden;
-  @media (min-width:860px) {
-    padding-right:17px;
-  }
 }
-header.modal-open{
-   @media (min-width:860px) {
-    padding-right:17px;
-  }
-}
+
 
 h1,
 h2,

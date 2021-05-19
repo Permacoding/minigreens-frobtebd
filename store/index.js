@@ -3,6 +3,7 @@ const requestCache = {
     articles: null,
     products: null,
     global:null,
+    contact:null,
     cart:null,
 }
 
@@ -12,11 +13,13 @@ export const actions = {
         const articles = await cacheArticles($strapi)
         const products = await cacheProducts($strapi)
         const global = await cacheGlobal($strapi)
+        const contact = await cacheContact($strapi)
         // now all posts are available in my Vuex store, 
         // which is accessed from lots of different places in the project
         commit('articles/setArticles', articles) 
         commit('products/setProducts', products) 
-        commit('global/setGlobal',global)
+        commit('global/setGlobal',global)   
+        commit('contact/setContact',contact)   
     }
 }
 
@@ -55,4 +58,14 @@ export const actions = {
     }
 
     return requestCache.global 
+}
+
+ function cacheContact ($strapi) {
+    if (!requestCache.contact) { 
+        requestCache.contact =  $strapi.find('contact')
+            .then(res => res)
+            .catch(err => console.log(err))
+    }
+
+    return requestCache.contact
 }

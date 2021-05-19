@@ -37,6 +37,7 @@
   font-size: 1.7em;
   .badge--nb--items {
     position: absolute;
+    user-select: none;
     top: -0.5em;
     right: -0.5em;
     background-color: var(--clr-brand-normal);
