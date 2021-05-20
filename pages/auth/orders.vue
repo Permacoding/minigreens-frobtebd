@@ -6,52 +6,54 @@
         >Déjà un compte ? Connectez-vous.</nuxt-link
       >
     </div>
-    <FormulateForm
-      v-model="formOrder"
-      ref="form"
-      class="form__order"
-      @validation="formIsValid = $refs.form.isValid"
-      :keep-model-data="true"
-    >
-      <div class="form__line">
-        <div class="form__col">
-          <h2 class="form__col__title">Détails de Facturation</h2>
-          <FormAddress group="addressPaiement" />
-          <FormulateInput
-            type="email"
-            name="email"
-            label="E-mail *"
-            validation="required|email"
-            class="max-w-88"
-          />
-        </div>
-        <div class="form__col">
-          <h2 class="form__col__title">Détails de Livraison</h2>
-          <FormulateInput
-            type="checkbox"
-            name="sameAddress"
-            label-position="before"
-            label="Utiliser la même adresse pour la livraison ?"
-            wrapper-class="flex flex-wrap items-center w-full"
-            class="no-min-h mb-4"
-            input-class="ml-4"
-            v-model="sameAddress"
-            ignored
-          />
-          <FormAddress group="addressDelivery" v-if="!sameAddress" />
-        </div>
-      </div>
-      <div class="form__line">
-        <CartList />
-      </div>
-      <loading-button
-        :loading="loading"
-        :disabled="!formIsValid"
-        @click="handleSubmit()"
-        class="button__action text-xl self-center mt-4 min-w-80"
-        >Procéder au paiement</loading-button
+    <client-only>
+      <FormulateForm
+        v-model="formOrder"
+        ref="form"
+        class="form__order"
+        @validation="formIsValid = $refs.form.isValid"
+        :keep-model-data="true"
       >
-    </FormulateForm>
+        <div class="form__line">
+          <div class="form__col">
+            <h2 class="form__col__title">Détails de Facturation</h2>
+            <FormAddress group="addressPaiement" />
+            <FormulateInput
+              type="email"
+              name="email"
+              label="E-mail *"
+              validation="required|email"
+              class="max-w-88"
+            />
+          </div>
+          <div class="form__col">
+            <h2 class="form__col__title">Détails de Livraison</h2>
+            <FormulateInput
+              type="checkbox"
+              name="sameAddress"
+              label-position="before"
+              label="Utiliser la même adresse pour la livraison ?"
+              wrapper-class="flex flex-wrap items-center w-full"
+              class="no-min-h mb-4"
+              input-class="ml-4"
+              v-model="sameAddress"
+              ignored
+            />
+            <FormAddress group="addressDelivery" v-if="!sameAddress" />
+          </div>
+        </div>
+        <div class="form__line">
+          <CartList />
+        </div>
+        <loading-button
+          :loading="loading"
+          :disabled="!formIsValid"
+          @click="handleSubmit()"
+          class="button__action text-xl self-center mt-4 min-w-80"
+          >Procéder au paiement</loading-button
+        >
+      </FormulateForm>
+    </client-only>
   </div>
 </template>
 
