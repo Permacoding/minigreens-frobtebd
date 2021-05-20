@@ -6,3 +6,30 @@
   .handwriting{
 font-family: var(--handwriting);
 }
+
+.auth__form__title{
+  font-size:2rem;
+  text-align: center;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.page__title{
+  font-weight: 700;
+  color:var(--clr-bg-dark);
+  font-size: 2.4rem;
+}
+
+.trash__icon {
+  font-size: 2rem;
+  cursor: pointer;
+  display: block;
+  padding: 0.15em;
+  border: 1px solid black;
+  background-color: white;
+  &:hover {
+    background-color: red;
+    color: white;
+    border: 1px solid red;
+  }
+}

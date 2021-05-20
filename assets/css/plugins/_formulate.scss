@@ -1,6 +1,9 @@
 .formulate-input{
   min-height: 6.0rem;
 }
+.no-min-h{
+  min-height: max-content;
+}
 .form__input{
   border-radius:5px;
   width:100%;
@@ -10,4 +13,8 @@
   &:focus{
     border: 1px solid var(--clr-brand-normal);
   }
+}
+.form__label{
+  color:var(--clr-brand-darker);
+  font-weight: 600;
 }

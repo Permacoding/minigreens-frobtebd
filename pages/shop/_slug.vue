@@ -19,7 +19,10 @@
         ><span class="unite">unité</span>
       </div>
       <div class="product__add_to_cart">
-        <number-input @changeNumber="nbProductToAdd = $event"></number-input>
+        <number-input
+          @changeNumber="nbProductToAdd = $event"
+          :number="nbProductToAdd"
+        ></number-input>
         <loading-button
           :loading="loading"
           @click="addToCart({ product: product, quantity: nbProductToAdd })"
@@ -97,11 +100,11 @@
       },
       addToCart(payload) {
         this.loading = true;
-        this.addCartItem(payload);
+        this.setCartItem(payload);
         this.$toast.success("Produit ajouté au panier.");
         this.loading = false;
       },
-      ...mapMutations({ addCartItem: "products/addCartItem" }),
+      ...mapMutations({ setCartItem: "products/addCartItem" }),
     },
     head() {
       const { defaultSeo, favicon, siteName } = this.global;

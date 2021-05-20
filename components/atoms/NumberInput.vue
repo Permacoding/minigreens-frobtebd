@@ -13,19 +13,36 @@
 
 <script>
   export default {
-    data() {
-      return {
-        inputNumber: 1,
-      };
+    props: {
+      number: {
+        type: Number,
+        required: true,
+      },
+      max: {
+        type: Number,
+        default: 100,
+      },
+      min: {
+        type: Number,
+        default: 0,
+      },
+    },
+    computed: {
+      inputNumber: {
+        get: function () {
+          return this.number;
+        },
+        set: function (value) {
+          this.$emit(
+            `changeNumber`,
+            Math.min(Math.max(this.min, value), this.max)
+          );
+        },
+      },
     },
     methods: {
       add(value = 1) {
-        this.inputNumber = Math.max(0, this.inputNumber + value);
-      },
-    },
-    watch: {
-      inputNumber(newValue, oldValue) {
-        this.$emit("changeNumber", newValue);
+        this.inputNumber += value;
       },
     },
   };

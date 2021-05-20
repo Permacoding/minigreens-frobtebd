@@ -36,17 +36,32 @@ export const mutations = {
   addCartItem: (state, payload) => {
     const product = payload.product;
     const quantity = payload.quantity 
-    
-    const index = state.cartItems.findIndex(el => el.product.id == product.id);
 
+    const index = state.cartItems.findIndex(el => el.product.id == product.id);
+    
     if(index > -1){
-      state.cartItems[index].quantity += quantity;
+        state.cartItems[index].quantity = state.cartItems[index].quantity + quantity;
+        }else{
+        state.cartItems.push(payload)
+        }
+
+  },
+  setCartItem: (state, payload) => {
+    const product = payload.product;
+    const quantity = payload.quantity 
+
+    if(quantity == 0){
+      state.cartItems = state.cartItems.filter(item => item.product.id != product.id)
     }else{
-      state.cartItems.push(payload)
+      const index = state.cartItems.findIndex(el => el.product.id == product.id);
+
+      if(index > -1){
+        state.cartItems[index].quantity = quantity;
+        }else{
+        state.cartItems.push(payload)
+        }
     }
   },
-  removeCartItem: (state, id) =>{
-    state.cartItems = state.cartItems.filter(item => item.product.id != id)
-  },
+
 
 }

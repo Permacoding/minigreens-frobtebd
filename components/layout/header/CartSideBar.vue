@@ -28,7 +28,7 @@
               <fa-icon
                 :icon="['far', 'trash-alt']"
                 class="trash__icon"
-                @click="removeCartItem(item.product.id)"
+                @click="setCartItem({ product: item.product, quantity: 0 })"
               />
             </div>
           </li>
@@ -71,7 +71,7 @@
     methods: {
       ...mapMutations({
         closeCart: "modal/closeModal",
-        removeCartItem: "products/removeCartItem",
+        setCartItem: "products/setCartItem",
       }),
     },
   };
@@ -143,18 +143,6 @@
 
 .cart__item--header {
   font-weight: light;
-}
-.trash__icon {
-  cursor: pointer;
-  height: 1.5em;
-  padding: 0.2em 0em;
-  border: 1px solid black;
-  background-color: white;
-  &:hover {
-    background-color: red;
-    color: white;
-    border: 1px solid red;
-  }
 }
 
 .cart__sidebar__footer {

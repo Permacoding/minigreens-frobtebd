@@ -5,11 +5,12 @@
   --clr-bg-darker: hsl(171, 56%, 8%);
   --clr-bg-dark: #0d302b;
   --clr-font-light: hsl(171, 56%, 92%);
-  --clr-bg-light: hsl(142, 67%, 98%);
+  --clr-bg-light: hsl(142, 67%, 99%);
   --clr-accent: hsl(142, 67%, 41%);
   --clr-brand-normal: #23af56;
   --clr-brand-blue: hsl(193, 67%, 76%);
   --clr-brand-dark: #1f8e67;
+  --clr-brand-dark-300: hsl(159, 64%, 54%);
   --clr-brand-light: #72c15c;
   --clr-brand-lighter: rgb(159, 213, 144);
   --clr-brand-yellow: #e8ea76;
@@ -17,6 +18,7 @@
   --clr-font-footer: rgb(204, 255, 238);;
   --clr-brand-darker: #18544a;
   --clr-brand-darker--200: hsl(170, 56%, 61%);
+  --clr-brand-darker-400: hsl(170, 56%, 41%);
   --p-section: 1.5em;
   --fz-normal: 1em;
   --fz-small: 0.75em;
@@ -35,11 +37,6 @@ html{
   overflow-y:scroll;
 }
 
-
-body.modal-open{
-  height: 100vh;
-  overflow: hidden;
-}
 
 
 h1,

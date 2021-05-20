@@ -13,6 +13,9 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     ],
+    script:[
+       { src: 'https://js.stripe.com/v3' }
+    ],
   },
 
   
@@ -24,7 +27,8 @@ export default {
     '@/assets/css/plugins/_toast',
     '@/assets/css/_fonts',
     '@/assets/css/_layout',
-    '@/assets/css/_transitions'
+    '@/assets/css/_transitions',
+    '@/assets/css/_forms'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

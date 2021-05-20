@@ -1,39 +1,43 @@
 <template>
   <div class="container-section">
-    <h1 class="text-2xl font-semibold text-center">Connexion</h1>
-    <p class="font-light text-center text-sm mb-6 mt-1">
-      Pas encore de compte ?
-      <nuxt-link to="/auth/register" class="link">Inscription</nuxt-link>
-    </p>
-    <FormulateForm v-model="formValues" class="max-w-88 m-auto flex flex-col">
-      <FormulateInput
-        type="email"
-        name="identifier"
-        label="Email"
-        validation="required|email"
-        class="max-w-88"
-      />
+    <div class="auth__form__container">
+      <div class="auth__form__header">
+        <h1 class="auth__form__title">Connexion</h1>
+        <p class="font-light text-center text-sm mt-1">
+          Pas encore de compte ?
+          <nuxt-link to="/auth/register" class="link">Inscription</nuxt-link>
+        </p>
+      </div>
+      <FormulateForm v-model="formValues" class="auth__form">
+        <FormulateInput
+          type="email"
+          name="identifier"
+          label="Email"
+          validation="required|email"
+          class="max-w-88"
+        />
 
-      <FormulateInput
-        type="password"
-        name="password"
-        label="Mot de passe"
-        validation="required|min:6,length"
-        validation-name="Mot de passe"
-        class="max-w-80"
-      />
-      <loading-button
-        :loading="loading"
-        @click="login()"
-        class="button__action text-lg self-center min-w-76 mt-4"
-        >Se connecter</loading-button
-      >
-      <nuxt-link
-        to="/auth/forgottenPassword"
-        class="self-center font-light mt-2 text-sm link"
-        >Mot de passe oublie ?</nuxt-link
-      >
-    </FormulateForm>
+        <FormulateInput
+          type="password"
+          name="password"
+          label="Mot de passe"
+          validation="required|min:6,length"
+          validation-name="Mot de passe"
+          class="max-w-80"
+        />
+        <loading-button
+          :loading="loading"
+          @click="login()"
+          class="button__action text-lg self-center mt-4 w-full"
+          >Se connecter</loading-button
+        >
+        <nuxt-link
+          to="/auth/forgottenPassword"
+          class="self-center font-light mt-2 text-sm link"
+          >Mot de passe oublie ?</nuxt-link
+        >
+      </FormulateForm>
+    </div>
   </div>
 </template>
 
@@ -57,7 +61,6 @@
       async login() {
         this.loading = true;
         try {
-          console.log(this.formValues);
           await this.$strapi.login(this.formValues);
           this.$toast.success("Bienvenue " + this.$strapi.user.username);
           this.$router.push("/");

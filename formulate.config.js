@@ -5,9 +5,9 @@ export default{
     locale:'fr',
     classes:{
         wrapper:['w-full'],
-        input: ['form__input'],
+        input: ['form__input '],
         element:['my-1'],
-        errors: ['text-red-400 text-xs px-1'],
-        label:[''],
+        errors: ['text-red-400 text-xs px-1 mb-4'],
+        label:['form__label'],
     }
 }

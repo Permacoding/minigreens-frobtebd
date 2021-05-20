@@ -1,27 +1,30 @@
 <template>
   <div class="auth-container">
-    <h1 class="text-2xl font-semibold text-center mb-4">
-      Mot de passe oublié ?
-    </h1>
-    <FormulateForm v-model="formValues" class="flex flex-col">
-      <div class="form-col">
-        <FormulateInput
-          type="email"
-          name="email"
-          label="Email"
-          validation="required|email"
-          :input-class="'w-80'"
-          class="mx-auto mb-4"
-          placeholder="example@mail.com"
-        />
-        <loading-button
-          :loading="loading"
-          @click="sendForgotPasswordMail()"
-          class="bg-indigo-500 text-gray-200 my-2"
-          >Envoyer le mail de réinitialisation</loading-button
-        >
+    <div class="auth__form__container">
+      <div class="auth__form__header">
+        <h1 class="text-2xl font-semibold text-center mb-4">
+          Mot de passe oublié ?
+        </h1>
       </div>
-    </FormulateForm>
+      <FormulateForm v-model="formValues" class="auth__form">
+        <div class="form-col">
+          <FormulateInput
+            type="email"
+            name="email"
+            label="Email"
+            validation="required|email"
+            class="mx-auto mb-4"
+            placeholder="example@mail.com"
+          />
+          <loading-button
+            :loading="loading"
+            @click="sendForgotPasswordMail()"
+            class="button__action w-full"
+            >Envoyer le mail de réinitialisation</loading-button
+          >
+        </div>
+      </FormulateForm>
+    </div>
   </div>
 </template>
 

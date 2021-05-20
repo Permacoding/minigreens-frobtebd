@@ -2,6 +2,7 @@
   <div>
     <div
       class="clickable-background opacity-0"
+      :Style="'top:' + scrollToTop + 'px;'"
       @click="closeModal"
       v-show="isDisplayed"
     ></div>
@@ -17,6 +18,11 @@
   import { mapGetters, mapMutations } from "vuex";
   export default {
     async fetch() {},
+    data() {
+      return {
+        scrollToTop: 0,
+      };
+    },
     computed: {
       ...mapGetters({
         isDisplayed: "modal/isBackgroundDisplayed",
@@ -29,10 +35,16 @@
     },
     watch: {
       isDisplayed(newValue, oldValue) {
+        // Hack for prevent body scroll when modal opened
         if (newValue) {
-          document.body.classList.add("modal-open");
+          this.scrollToTop = window.scrollY;
+          document.body.style.position = "fixed";
+          document.body.style.top = -this.scrollToTop + "px";
+          document.body.style.width = "100vw";
         } else {
-          document.body.classList.remove("modal-open");
+          document.body.style.position = "";
+          window.scrollTo(0, parseInt(this.scrollToTop));
+          document.body.style.top = "0px";
         }
       },
     },
