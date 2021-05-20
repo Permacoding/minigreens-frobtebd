@@ -24,8 +24,7 @@
     "core-js": "^3.9.1",
     "markdown-it-attrs": "^4.0.0",
     "markdown-it-div": "^1.1.0",
-    "nuxt": "^2.15.3",
-    "vue-stripe-elements-plus": "^1.0.0"
+    "nuxt": "^2.15.3"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.3",
