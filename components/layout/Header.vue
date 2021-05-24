@@ -4,7 +4,9 @@
       <nuxt-link to="/">
         <img src="@/assets/logo.png" class="logo" alt="logo" />
       </nuxt-link>
-      <HeaderMenuDesktop :menu="menuWithAuth" />
+      <client-only>
+        <HeaderMenuDesktop :menu="menuWithAuth" />
+      </client-only>
       <div class="icons__right">
         <HeaderHamburger
           class="hamburger__menu"
