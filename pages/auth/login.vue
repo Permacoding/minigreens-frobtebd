@@ -1,5 +1,5 @@
 <template>
-  <div class="container-section">
+  <div class="container__section">
     <div class="auth__form__container">
       <div class="auth__form__header">
         <h1 class="auth__form__title">Connexion</h1>

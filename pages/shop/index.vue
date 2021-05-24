@@ -1,5 +1,5 @@
 <template>
-  <section class="shop container-section">
+  <section class="shop container__section">
     <!--  <div class="filters">
       <div class="filter-item">
         <input

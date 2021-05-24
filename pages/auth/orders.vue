@@ -1,5 +1,5 @@
 <template>
-  <div class="container-section order">
+  <div class="container__section order">
     <div class="order__header">
       <h1 class="page__title">Ma Commande</h1>
       <nuxt-link to="/auth/login" class="button__action--secondary--light"
