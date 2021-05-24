@@ -1,53 +1,56 @@
 <template>
   <footer class="footer">
     <div class="footer-container">
-    <div class="company">
-      <div class="split">
-        <fa-icon icon="map-marker-alt" style="font-size:20px;" />
-        <p>
-        </p>
-      </div>
-    
+      <div class="company">
         <div class="split">
-          <fa-icon icon="phone-alt" style="font-size:20px;" /> 
-          <p>{{ phone }} </p>
+          <fa-icon icon="map-marker-alt" style="font-size: 20px" />
+          <p v-html="$md.render(address)"></p>
+        </div>
+
+        <div class="split">
+          <fa-icon icon="phone-alt" style="font-size: 20px" />
+          <p>{{ phone }}</p>
         </div>
         <div class="split">
-          <fa-icon :icon="['far', 'envelope']"  style="font-size:20px;"/>
-          <a href="mailto:contact@minigreens.fr"
-            >{{ email }}</a
+          <fa-icon :icon="['far', 'envelope']" style="font-size: 20px" />
+          <a href="mailto:contact@minigreens.fr">{{ email }}</a
           ><br />
         </div>
-      </p>
-      <img src="@/assets/logo_fond_blanc.png" alt="logo footer" />
-    </div>
-    <div class="blog">
-      <h3 class="nav__item__footer title__section__footer">Meilleurs ventes</h3>
-      <nuxt-link
-        v-for="product in bestSell(3)"
-        :key="product.id"
-        :to="'/shop/' + product.slug"
-        class="nav__item__footer"
-      >
-        {{ product.title }}
-      </nuxt-link>
-    </div>
-    <div class="menu__footer">
-      <div >
+        <img src="@/assets/logo_fond_blanc.png" alt="logo footer" />
+      </div>
+      <div class="blog">
+        <h3 class="nav__item__footer title__section__footer">
+          Meilleurs ventes
+        </h3>
         <nuxt-link
-          v-for="(item, index) in menuWithLegal"
-          :key="index"
-          :to="item.link"
+          v-for="product in bestSell(3)"
+          :key="product.id"
+          :to="'/shop/' + product.slug"
           class="nav__item__footer"
         >
-          {{ item.text }}
+          {{ product.title }}
         </nuxt-link>
       </div>
-      <div class="social">
-       <a :href="facebook"> <fa-icon :icon="['fab', 'facebook']" /></a>
-       <a :href="instagram"> <fa-icon :icon="['fab', 'instagram']" /></a>
+      <div class="menu__footer">
+        <div>
+          <nuxt-link
+            v-for="(item, index) in menuWithLegal"
+            :key="index"
+            :to="item.link"
+            class="nav__item__footer"
+          >
+            {{ item.text }}
+          </nuxt-link>
+        </div>
+        <div class="social">
+          <a :href="facebook" v-if="facebook != ''">
+            <fa-icon :icon="['fab', 'facebook']"
+          /></a>
+          <a :href="'https://www.instagram.com/' + instagram">
+            <fa-icon :icon="['fab', 'instagram']"
+          /></a>
+        </div>
       </div>
-    </div>
     </div>
   </footer>
 </template>
