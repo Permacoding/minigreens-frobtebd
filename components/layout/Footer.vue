@@ -4,7 +4,7 @@
       <div class="company">
         <div class="split">
           <fa-icon icon="map-marker-alt" style="font-size: 20px" />
-          <p v-html="$md.render(address)"></p>
+          <p v-html="address ? $md.render(address) : ''"></p>
         </div>
 
         <div class="split">
