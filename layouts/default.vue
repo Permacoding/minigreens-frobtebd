@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="clickable-background opacity-0"
+      class="clickable-background"
       :Style="'top:' + scrollToTop + 'px;'"
       @click="closeModal"
       v-show="isDisplayed"
@@ -20,6 +20,7 @@
     async fetch() {},
     data() {
       return {
+        mounted: false,
         scrollToTop: 0,
       };
     },

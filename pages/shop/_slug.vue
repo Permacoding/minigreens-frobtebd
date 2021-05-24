@@ -1,17 +1,19 @@
 <template>
   <section class="fiche--article container__section">
     <h1 class="product--title">{{ product.title }}</h1>
-    <img class="photo" :src="currentPhoto" />
-    <div class="other-photos h-20 items-center">
-      <img
-        v-for="(photo, index) in product.images"
-        :key="index"
-        :src="getStrapiMedia(photo.formats.thumbnail.url)"
-        class="other-photo-item"
-        :class="{ bordered: currentIndexPhoto == index }"
-        :alt="index"
-        @click="currentIndexPhoto = index"
-      />
+    <div>
+      <img class="photo" :src="currentPhoto" />
+      <div class="other-photos h-20 items-center">
+        <img
+          v-for="(photo, index) in product.images"
+          :key="index"
+          :src="getStrapiMedia(photo.formats.thumbnail.url)"
+          class="other-photo-item"
+          :class="{ bordered: currentIndexPhoto == index }"
+          :alt="index"
+          @click="currentIndexPhoto = index"
+        />
+      </div>
     </div>
     <div class="infos-price">
       <div class="cadre-price">
@@ -30,16 +32,24 @@
           >Ajouter au panier</loading-button
         >
       </div>
+      <div class="product__weigth">
+        Poids:
+        {{
+          product.poids > 1000
+            ? (product.poids / 1000).toFixed(1) + " kg"
+            : product.poids + " g"
+        }}
+      </div>
+      <div class="description">
+        <h2 class="h2-product">Description</h2>
+        {{ product.description }}
+      </div>
     </div>
-    <div class="description">
-      <h2 class="h2-product">Description</h2>
-      {{ product.description }}
-    </div>
-    <div class="related-recipe">
+    <div class="related-recipe" v-if="product.recettes">
       <h2 class="h2-product">Recettes Associées</h2>
       Test, test , lalal , lala.
     </div>
-    <div class="conseils">
+    <div class="conseils" v-if="product.conseils">
       <h2 class="h2-product">Conseils</h2>
       <p class="p-product">
         {{ product.conseils }}
@@ -58,7 +68,7 @@
         </li>
       </ul>
     </div>
-    <div class="nutrition">
+    <div class="nutrition" v-if="product.nutrition">
       <h2 class="h2-product">Nutrition</h2>
       <p class="p-product">{{ product.nutrition }}</p>
     </div>
@@ -87,7 +97,7 @@
         return this.getProductBySlug(this.$route.params.slug);
       },
       currentPhoto() {
-        if (this.product.images && this.product.images.lenght > 0)
+        if (this.product.images && this.product.images.length > 0)
           return this.getStrapiMedia(
             this.product.images[this.currentIndexPhoto].formats.medium.url
           );
@@ -150,28 +160,12 @@
     "conseils nutrition";
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .fiche--article {
-    grid-template-columns: minmax(300px, 1fr);
-    grid-template-areas:
-      "title"
-      "top-photo"
-      "other-photo"
-      "price"
-      "description"
-      "nutrition"
-      "benefices"
-      "recipes"
-      "conseils";
-    gap: 1rem;
+    display: block;
   }
 }
-.conseils {
-  grid-area: conseils;
-}
-.benefices {
-  grid-area: benefices;
-}
+
 .benefices-list {
   margin: 1.5rem 0;
   padding-left: 1rem;
@@ -188,22 +182,6 @@
   height: 0.3em;
 }
 
-.light:before {
-  color: var(--clr-brand-light);
-}
-.dark:before {
-  color: var(--clr-brand-dark);
-}
-.normal:before {
-  color: var(--clr-brand-normal);
-}
-.darker:before {
-  color: var(--clr-brand-darker);
-}
-
-.description {
-  grid-area: description;
-}
 .product__add_to_cart {
   display: flex;
   gap: 1rem;
@@ -213,7 +191,6 @@
   margin: 1rem 1rem 1rem 0;
 }
 .infos-price {
-  grid-area: price;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -241,20 +218,14 @@
   margin-left: 0.2em;
   letter-spacing: 0.2em;
 }
-.related-recipe {
-  grid-area: recipes;
-}
-.nutrition {
-  grid-area: nutrition;
-}
 .product--title {
-  grid-area: title;
+  grid-column: span 2;
   display: flex;
   justify-content: center;
   font-family: var(--handwriting);
 }
 .photo {
-  grid-area: top-photo;
+  grid-row: span 2;
   width: 100%;
   height: min(400px, 100vw);
   object-fit: cover;
@@ -271,10 +242,13 @@
   border: 2px solid var(--clr-brand-blue);
 }
 .other-photos {
-  grid-area: other-photo;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
+}
+.product__weigth {
+  color: var(--clr-brand-darker);
+  font-weight: 600;
+  font-size: 1.3rem;
 }
 .h2-product {
   font-size: 1.5em;

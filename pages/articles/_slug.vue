@@ -84,6 +84,18 @@
   line-height: 1.6em;
   margin-top: 1em;
 }
+
+.article--body > ul > li {
+  margin-bottom: 0.8em;
+  margin-left: 2rem;
+}
+.article--body > ul > li:before {
+  content: "\23FA";
+  margin-right: 1rem;
+  font-size: 0.6rem;
+  width: 0.3em;
+  height: 0.3em;
+}
 .article--body > * + * {
   padding: 1em 0 1em 0;
 }

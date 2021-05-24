@@ -54,6 +54,19 @@ h2 {
   line-height: 90%;
 }
 
+.light:before {
+  color: var(--clr-brand-light);
+}
+.dark:before {
+  color: var(--clr-brand-dark);
+}
+.normal:before {
+  color: var(--clr-brand-normal);
+}
+.darker:before {
+  color: var(--clr-brand-darker);
+}
+
 
 
 
