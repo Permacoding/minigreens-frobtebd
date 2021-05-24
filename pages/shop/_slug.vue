@@ -42,18 +42,15 @@
       </div>
       <div class="description">
         <h2 class="h2-product">Description</h2>
-        {{ product.description }}
+        <div v-html="$md.render(product.description)"></div>
       </div>
     </div>
     <div class="related-recipe" v-if="product.recettes">
       <h2 class="h2-product">Recettes Associées</h2>
-      Test, test , lalal , lala.
     </div>
     <div class="conseils" v-if="product.conseils">
       <h2 class="h2-product">Conseils</h2>
-      <p class="p-product">
-        {{ product.conseils }}
-      </p>
+      <div v-html="$md.render(product.conseils)"></div>
     </div>
 
     <div class="benefices" v-if="product.benefices">
@@ -70,7 +67,7 @@
     </div>
     <div class="nutrition" v-if="product.nutrition">
       <h2 class="h2-product">Nutrition</h2>
-      <p class="p-product">{{ product.nutrition }}</p>
+      <div v-html="$md.render(product.nutrition)">{{ product.nutrition }}</div>
     </div>
   </section>
 </template>
@@ -151,18 +148,14 @@
   gap: 1rem 1.5rem;
   grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr);
   grid-auto-flow: dense;
-  grid-template-areas:
-    "title title"
-    "top-photo price"
-    "top-photo description"
-    "other-photo benefices"
-    "recipes benefices"
-    "conseils nutrition";
 }
 
 @media (max-width: 800px) {
   .fiche--article {
     display: block;
+  }
+  .fiche--article > * {
+    margin-top: 1rem;
   }
 }
 
