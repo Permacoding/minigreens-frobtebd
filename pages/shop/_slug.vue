@@ -87,9 +87,11 @@
         return this.getProductBySlug(this.$route.params.slug);
       },
       currentPhoto() {
-        return this.getStrapiMedia(
-          this.product.images[this.currentIndexPhoto].formats.medium.url
-        );
+        if (this.product.images && this.product.images.lenght > 0)
+          return this.getStrapiMedia(
+            this.product.images[this.currentIndexPhoto].formats.medium.url
+          );
+        else return "https://via.placeholder.com/300x300?text=Minigreens";
       },
     },
     methods: {

@@ -19,7 +19,8 @@ export const getters = {
           .reduce((a, b) => a + b).toFixed(2),
     chooseRandom : (state)  => (number = 1 ) => {
       const res = [];
-      for(let i = 0; i < number; ){
+      const maxNumber = Math.min(state.allProducts.length, number);
+      for(let i = 0; i < maxNumber; ){
         const random = Math.floor(Math.random() * state.allProducts.length)
         if(res.indexOf(state.allProducts[random]) !== -1){
             continue

@@ -38,12 +38,10 @@
         <div
           class="card__image"
           :style="
-            'background-image: url(' +
-            getStrapiMedia(product.images[1].url) +
-            ')'
+            'background-image: url(' + getProductImgBackground(product) + ')'
           "
         >
-          <transition-group name="fade">
+          <transition-group name="fade" v-if="product.images.length > 1">
             <img
               :src="getStrapiMedia(product.images[0].url)"
               v-if="hover != product.id"
@@ -84,6 +82,13 @@
     },
     methods: {
       getStrapiMedia,
+      getProductImgBackground(product) {
+        if (product.images && product.images.length > 1)
+          return getStrapiMedia(product.images[1].url);
+        else if (product.images && product.images.length == 1)
+          return getStrapiMedia(product.images[0].url);
+        else return "https://via.placeholder.com/300x300?text=Minigreens";
+      },
     },
     head() {
       const { defaultSeo, favicon, siteName } = this.global;
