@@ -60,10 +60,11 @@
 
 <script>
   export default {
-    data() {
-      return {
-        formContact: {},
-      };
+    props: {
+      group: {
+        type: String,
+        default: "",
+      },
     },
   };
 </script>
