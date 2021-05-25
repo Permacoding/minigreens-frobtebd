@@ -126,12 +126,14 @@
     background-color: var(--clr-font-light);
   }
   display: flex;
+  align-items: center;
   padding: 0.9em 0.7em;
   :nth-child(1) {
     flex-basis: 50%;
   }
   :nth-child(2) {
     flex-basis: 25%;
+    text-align: center;
   }
   :nth-child(3) {
     flex-basis: 25%;

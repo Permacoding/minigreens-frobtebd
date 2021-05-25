@@ -94,6 +94,7 @@ export default {
       { name: 'farm', type: 'single' },
       { name: 'global', type: 'single' },
       { name: 'articles', type: 'collection' },
+      { name: 'messages', type: 'collection' },
       { name: 'products', type: 'collection' },
       { name: 'orders', type: 'collection' },
     ]

@@ -13,8 +13,7 @@
         </div>
         <div class="split">
           <fa-icon :icon="['far', 'envelope']" style="font-size: 20px" />
-          <a href="mailto:contact@minigreens.fr">{{ email }}</a
-          ><br />
+          {{ email }}<br />
         </div>
         <img src="@/assets/logo_fond_blanc.png" alt="logo footer" />
       </div>

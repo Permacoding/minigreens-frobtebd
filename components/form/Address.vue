@@ -1,7 +1,7 @@
 <template>
   <div class="address">
     <FormulateInput type="group" :name="group">
-      <div class="form-line">
+      <div>
         <FormulateInput
           type="text"
           name="last_name"
@@ -60,11 +60,10 @@
 
 <script>
   export default {
-    props: {
-      group: {
-        type: String,
-        default: "",
-      },
+    data() {
+      return {
+        formContact: {},
+      };
     },
   };
 </script>
