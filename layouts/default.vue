@@ -2,9 +2,9 @@
   <div>
     <div
       class="clickable-background"
-      :Style="'top:' + scrollToTop + 'px;'"
+      :style="'top:' + scrollToTop + 'px;'"
       @click="closeModal"
-      v-show="isDisplayed"
+      v-show="isDisplayed && mounted"
     ></div>
     <Header />
     <div class="page-container">
@@ -29,6 +29,9 @@
         isDisplayed: "modal/isBackgroundDisplayed",
       }),
     },
+    mounted() {
+      this.mounted = true;
+    },
     methods: {
       ...mapMutations({
         closeModal: "modal/closeModal",
@@ -41,7 +44,7 @@
           this.scrollToTop = window.scrollY;
           document.body.style.position = "fixed";
           document.body.style.top = -this.scrollToTop + "px";
-          document.body.style.width = "100vw";
+          document.body.style.width = "100%";
         } else {
           document.body.style.position = "";
           window.scrollTo(0, parseInt(this.scrollToTop));
