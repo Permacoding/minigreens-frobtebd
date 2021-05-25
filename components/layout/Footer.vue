@@ -13,7 +13,8 @@
         </div>
         <div class="split">
           <fa-icon :icon="['far', 'envelope']" style="font-size: 20px" />
-          {{ email }}<br />
+          <span>{{ email }}</span
+          ><br />
         </div>
         <img src="@/assets/logo_fond_blanc.png" alt="logo footer" />
       </div>

@@ -74,7 +74,7 @@ h2 {
 nuxt-link @nuxt
 #############*/
 
-a.nuxt-link-exact-active {
+a.nuxt-link-exact-active:not(.button__action) {
   color: var(--clr-brand-normal);
 }
 

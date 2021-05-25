@@ -17,7 +17,7 @@
   background-color: var(--clr-bg-light);
   border:1px solid var(--clr-brand-dark);
   box-shadow: 0 5px 25px 0px rgba(0,0,0, 0.10);
-  
+
   @media (max-width:400px) {
     margin: 3rem -1.5rem;
     border:0;
@@ -38,4 +38,9 @@
   background-color: var(--clr-brand-dark);
   color:var(--clr-font-light);
   padding: 0.8rem;
+}
+
+.page__content{
+  max-width:75ch;
+  margin:auto
 }

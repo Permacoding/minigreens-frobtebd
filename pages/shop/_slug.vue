@@ -15,59 +15,34 @@
         />
       </div>
     </div>
-    <div class="infos-price">
-      <div class="cadre-price">
-        <span class="price">{{ product.price }}€</span
-        ><span class="unite">unité</span>
+    <div>
+      <div class="infos-price">
+        <div class="cadre-price">
+          <span class="price">{{ product.price }}€</span
+          ><span class="unite">unité</span>
+        </div>
+        <div class="product__add_to_cart">
+          <number-input
+            @changeNumber="nbProductToAdd = $event"
+            :number="nbProductToAdd"
+          ></number-input>
+          <loading-button
+            :loading="loading"
+            @click="addToCart({ product: product, quantity: nbProductToAdd })"
+            class="button__action text-lg"
+            >Ajouter au panier</loading-button
+          >
+        </div>
+        <div class="product__weigth">
+          Poids:
+          {{
+            product.poids > 1000
+              ? (product.poids / 1000).toFixed(1) + " kg"
+              : product.poids + " g"
+          }}
+        </div>
       </div>
-      <div class="product__add_to_cart">
-        <number-input
-          @changeNumber="nbProductToAdd = $event"
-          :number="nbProductToAdd"
-        ></number-input>
-        <loading-button
-          :loading="loading"
-          @click="addToCart({ product: product, quantity: nbProductToAdd })"
-          class="button__action text-lg"
-          >Ajouter au panier</loading-button
-        >
-      </div>
-      <div class="product__weigth">
-        Poids:
-        {{
-          product.poids > 1000
-            ? (product.poids / 1000).toFixed(1) + " kg"
-            : product.poids + " g"
-        }}
-      </div>
-      <div class="description">
-        <h2 class="h2-product">Description</h2>
-        <div v-html="$md.render(product.description)"></div>
-      </div>
-    </div>
-    <div class="related-recipe" v-if="product.recettes">
-      <h2 class="h2-product">Recettes Associées</h2>
-    </div>
-    <div class="conseils" v-if="product.conseils">
-      <h2 class="h2-product">Conseils</h2>
-      <div v-html="$md.render(product.conseils)"></div>
-    </div>
-
-    <div class="benefices" v-if="product.benefices">
-      <h2 class="h2-product">Bénéfices</h2>
-      <ul class="benefices-list">
-        <li
-          v-for="(benefice, index) in product.benefices.list"
-          :key="index"
-          :class="colorClassByIndex(index)"
-        >
-          {{ benefice.text }}
-        </li>
-      </ul>
-    </div>
-    <div class="nutrition" v-if="product.nutrition">
-      <h2 class="h2-product">Nutrition</h2>
-      <div v-html="$md.render(product.nutrition)">{{ product.nutrition }}</div>
+      <Accordeon :tabs="tabs" />
     </div>
   </section>
 </template>
@@ -92,6 +67,48 @@
       }),
       product() {
         return this.getProductBySlug(this.$route.params.slug);
+      },
+      tabs() {
+        const result = [];
+
+        if (this.product.description)
+          result.push({
+            title: "Description",
+            content: this.$md.render(this.product.description),
+          });
+
+        if (this.product.nutrition)
+          result.push({
+            title: "Nutrition",
+            content: this.$md.render(this.product.nutrition),
+          });
+
+        if (this.product.conseils)
+          result.push({
+            title: "Conseils",
+            content: this.$md.render(this.product.conseils),
+          });
+
+        if (this.product.benefices) {
+          let content = `<ul class="benefices-list">`;
+          this.product.benefices.list.forEach((e, index) => {
+            content =
+              content +
+              `<li class="` +
+              this.colorClassByIndex(index) +
+              `">` +
+              e.text +
+              `</li>`;
+          });
+          content = content + `</ul>`;
+
+          result.push({
+            title: "Bénéfices",
+            content: content,
+          });
+        }
+
+        return result;
       },
       currentPhoto() {
         if (this.product.images && this.product.images.length > 0)
@@ -145,7 +162,7 @@
 .fiche--article {
   margin: auto;
   display: grid;
-  gap: 1rem 1.5rem;
+  grid-gap: 1rem 1.5rem;
   grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr);
   grid-auto-flow: dense;
 }
@@ -160,7 +177,6 @@
 }
 
 .benefices-list {
-  margin: 1.5rem 0;
   padding-left: 1rem;
 }
 .benefices-list > li {
@@ -177,16 +193,14 @@
 
 .product__add_to_cart {
   display: flex;
-  gap: 1rem;
   align-items: center;
 }
 .product__add_to_cart > * {
-  margin: 1rem 1rem 1rem 0;
+  margin: 0rem 1rem;
 }
 .infos-price {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
   align-items: center;
   justify-content: space-between;
 }
@@ -194,6 +208,7 @@
   background-color: var(--clr-brand-yellow2);
   padding: 0.2em 1em;
   display: inline-block;
+  margin-bottom: 1rem;
 }
 .price {
   font-weight: 700;
@@ -225,6 +240,7 @@
 }
 .other-photo-item {
   width: 4rem;
+  margin: 0 0.5rem 0 0;
   cursor: pointer;
   border-radius: 5%;
   height: 4rem;
@@ -242,6 +258,7 @@
   color: var(--clr-brand-darker);
   font-weight: 600;
   font-size: 1.3rem;
+  margin: 1rem 0;
 }
 .h2-product {
   font-size: 1.5em;
