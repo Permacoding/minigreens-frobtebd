@@ -46,16 +46,13 @@
         let authLinks = [];
         if (this.$strapi.user) {
           authLinks.push({
-            link: "/auth/orders",
+            link: "/auth/account",
             text: "Mon Compte",
-            submenu: [
-              { link: "/auth/orders", text: "Mes commandes" },
-              { text: "Se deconnecter" },
-            ],
+            submenu: [{ text: "Se deconnecter" }],
           });
         } else {
           authLinks.push({
-            link: "/auth/orders",
+            link: "/auth/account",
             text: "Mon Compte",
             submenu: [
               { link: "/auth/login", text: "se connecter" },

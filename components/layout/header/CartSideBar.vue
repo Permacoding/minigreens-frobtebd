@@ -48,7 +48,7 @@
       </div>
       <nuxt-link
         class="cart__checkout button__action"
-        to="/auth/orders"
+        to="/orders"
         :disabled="nbCartItems == 0"
       >
         Commander
